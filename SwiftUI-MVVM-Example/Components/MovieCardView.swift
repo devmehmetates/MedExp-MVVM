@@ -6,74 +6,64 @@
 //
 
 import SwiftUI
+import SwiftUIAnimatedRingCharts
 
 struct MovieCardView: View {
+    // MARK: Computed variable(s)
     @Environment(\.colorScheme) private var colorScheme
     private var backgroundColor: Color {
         colorScheme == .dark ? .black : .white
     }
+    private var contentPointColor: Color {
+        point < 50 ? .red : point < 80 ? .yellow : .green
+    }
     
+    private var contentPointColorSecond: Color {
+        contentPointColor.opacity(0.4)
+    }
+    
+    // MARK: Extended variable(s)
+    let title: String
+    let point: CGFloat
+    let imagePath: String
     
     var body: some View {
         VStack {
-            ZStack(alignment: .bottom) {
-                AnimatedAsyncImageView(path: "https://beatroutemedia.com/wp-content/uploads/2021/04/Tate-McRae-BeatRoute-1-1.jpg")
-                Rectangle()
-                    .cornerRadius(10.0)
-                    .foregroundStyle(createLinearGradient())
-                Text("Tate mcrae")
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
+            VStack {
+                AnimatedAsyncImageView(path: imagePath)
+                HStack {
+                    Text(title)
+                        .lineLimit(3)
+                        .multilineTextAlignment(.leading)
+                        .fontWeight(.bold)
+                        .font(.caption2)
+                    Spacer()
+                    ZStack {
+                        RingChartsView(values: [point], colors: [[contentPointColor, contentPointColorSecond]], ringsMaxValue: 100, lineWidth: 1.2.responsizeW)
+                            .frame(width: 11.0.responsizeW, height: 11.0.responsizeW)
+                        Text("%\(point.formatted())")
+                            .font(.caption2)
+                    }
+                }.padding(.horizontal, 11)
+                    .padding(.vertical, 7)
                     .font(.callout)
-                    .fontWeight(.bold)
-                    .padding(.bottom)
-            }.frame(width: 40.0.responsizeW, height: 60.0.responsizeW)
-        }.shadow(color: .gray.opacity(0.3), radius: 10)
+            }.padding(.bottom, 7)
+        }.frame(width: 45.0.responsizeW, height: 80.0.responsizeW)
+            .background(
+                Rectangle()
+                    .foregroundStyle(createLinearGradient())
+                    .cornerRadius(12)
+                    .shadow(color: .gray.opacity(0.3), radius: 8)
+            )
     }
     
     func createLinearGradient() -> LinearGradient {
-        LinearGradient(colors: [.clear, backgroundColor.opacity(0.5), backgroundColor.opacity(0.75), backgroundColor.opacity(0.9)], startPoint: .top, endPoint: .bottom)
+        LinearGradient(colors: [.clear, backgroundColor.opacity(0.2), backgroundColor.opacity(0.5), backgroundColor.opacity(0.8)], startPoint: .top, endPoint: .bottom)
     }
 }
 
 struct MovieCardView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieCardView()
+        MovieCardView(title: "The Purge (2018)", point: 69, imagePath: AppConstants.shared.exampleImagePath)
     }
-}
-
-struct AnimatedAsyncImageView: View {
-    let path: String
-    private var url: URL? {
-        URL(string: path)
-    }
-    
-    var body: some View {
-        GeometryReader { proxy in
-            AsyncImage(url: url, transaction: .init(animation: .easeInOut)) { phase in
-                if let image = phase.image {
-                    image.resizable()
-                        .scaledToFill()
-                        .clipped()
-                } else if phase.error != nil {
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .background(.ultraThickMaterial)
-                        Image(systemName: "xmark")
-                    }
-                } else {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .background(.ultraThickMaterial)
-                }
-            }.frame(width: proxy.size.width, height: proxy.size.height, alignment: .center)
-                .cornerRadius(10.0)
-        }
-    }
-}
-
-extension Double {
-    var responsizeW: Double { return UIScreen.main.bounds.size.width * self / 100 }
-    var responsizeH: Double { return UIScreen.main.bounds.size.height * self / 100 }
 }
