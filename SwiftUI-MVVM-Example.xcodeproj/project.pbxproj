@@ -7,14 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0085F482913EB98001C174A /* AnimatedAsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0085F472913EB98001C174A /* AnimatedAsyncImageView.swift */; };
+		C0085F4C2913EE49001C174A /* Double + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0085F4B2913EE49001C174A /* Double + Ext.swift */; };
+		C0085F4E2913EE72001C174A /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0085F4D2913EE72001C174A /* AppConstants.swift */; };
 		C010A56D291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C010A56C291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift */; };
 		C010A56F291178CE00C971FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C010A56E291178CE00C971FB /* ContentView.swift */; };
 		C010A571291178CF00C971FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C010A570291178CF00C971FB /* Assets.xcassets */; };
 		C010A574291178CF00C971FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C010A573291178CF00C971FB /* Preview Assets.xcassets */; };
+		C0F628262913F7980020BB59 /* SwiftUIAnimatedRingCharts in Frameworks */ = {isa = PBXBuildFile; productRef = C0F628252913F7980020BB59 /* SwiftUIAnimatedRingCharts */; };
 		C0FA34A22912DCBB00885E73 /* MovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FA34A12912DCBB00885E73 /* MovieCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C0085F472913EB98001C174A /* AnimatedAsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedAsyncImageView.swift; sourceTree = "<group>"; };
+		C0085F4B2913EE49001C174A /* Double + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + Ext.swift"; sourceTree = "<group>"; };
+		C0085F4D2913EE72001C174A /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		C010A569291178CE00C971FB /* SwiftUI-MVVM-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-MVVM-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C010A56C291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_MVVM_ExampleApp.swift; sourceTree = "<group>"; };
 		C010A56E291178CE00C971FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -28,12 +35,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0F628262913F7980020BB59 /* SwiftUIAnimatedRingCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C0085F492913EE2F001C174A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C0085F4B2913EE49001C174A /* Double + Ext.swift */,
+				C0085F4D2913EE72001C174A /* AppConstants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		C010A560291178CE00C971FB = {
 			isa = PBXGroup;
 			children = (
@@ -53,6 +70,7 @@
 		C010A56B291178CE00C971FB /* SwiftUI-MVVM-Example */ = {
 			isa = PBXGroup;
 			children = (
+				C0085F492913EE2F001C174A /* Utils */,
 				C0FA34A02912DCAD00885E73 /* Components */,
 				C010A56C291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift */,
 				C010A56E291178CE00C971FB /* ContentView.swift */,
@@ -74,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				C0FA34A12912DCBB00885E73 /* MovieCardView.swift */,
+				C0085F472913EB98001C174A /* AnimatedAsyncImageView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -94,6 +113,9 @@
 			dependencies = (
 			);
 			name = "SwiftUI-MVVM-Example";
+			packageProductDependencies = (
+				C0F628252913F7980020BB59 /* SwiftUIAnimatedRingCharts */,
+			);
 			productName = "SwiftUI-MVVM-Example";
 			productReference = C010A569291178CE00C971FB /* SwiftUI-MVVM-Example.app */;
 			productType = "com.apple.product-type.application";
@@ -122,6 +144,9 @@
 				Base,
 			);
 			mainGroup = C010A560291178CE00C971FB;
+			packageReferences = (
+				C0F628242913F7980020BB59 /* XCRemoteSwiftPackageReference "SwiftUIAnimatedRingCharts" */,
+			);
 			productRefGroup = C010A56A291178CE00C971FB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -148,8 +173,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0085F4C2913EE49001C174A /* Double + Ext.swift in Sources */,
+				C0085F4E2913EE72001C174A /* AppConstants.swift in Sources */,
 				C010A56F291178CE00C971FB /* ContentView.swift in Sources */,
 				C0FA34A22912DCBB00885E73 /* MovieCardView.swift in Sources */,
+				C0085F482913EB98001C174A /* AnimatedAsyncImageView.swift in Sources */,
 				C010A56D291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +379,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C0F628242913F7980020BB59 /* XCRemoteSwiftPackageReference "SwiftUIAnimatedRingCharts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devmehmetates/SwiftUIAnimatedRingCharts.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C0F628252913F7980020BB59 /* SwiftUIAnimatedRingCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0F628242913F7980020BB59 /* XCRemoteSwiftPackageReference "SwiftUIAnimatedRingCharts" */;
+			productName = SwiftUIAnimatedRingCharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C010A561291178CE00C971FB /* Project object */;
 }
