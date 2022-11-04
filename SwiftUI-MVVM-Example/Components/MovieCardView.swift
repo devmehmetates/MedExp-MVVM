@@ -12,7 +12,7 @@ struct MovieCardView: View {
     // MARK: Computed variable(s)
     @Environment(\.colorScheme) private var colorScheme
     private var backgroundColor: Color {
-        colorScheme == .dark ? .black : .white
+        colorScheme == .dark ? .gray.opacity(0.2) : .white
     }
     private var contentPointColor: Color {
         point < 50 ? .red : point < 80 ? .yellow : .green
@@ -53,7 +53,7 @@ struct MovieCardView: View {
                 Rectangle()
                     .foregroundStyle(createLinearGradient())
                     .cornerRadius(12)
-                    .shadow(color: .gray.opacity(0.3), radius: 8)
+                    .shadow(color: .gray.opacity(0.3), radius: colorScheme == .dark ? 0 : 8)
             )
     }
     
