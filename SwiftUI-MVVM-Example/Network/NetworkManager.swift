@@ -12,10 +12,10 @@ struct NetworkManager {
     
     func createRequestURL(_ endPoint: String, page: Int? = nil) -> URL {
         if let page {
-            return URL(string: "https://api.themoviedb.org/3/discover/tv?sort_by=popularity.desc&page=1&api_key=\(AppEnvironments.apiKey)")!
+            return URL(string: "https://api.themoviedb.org/3\(endPoint)=\(page)&api_key=\(AppEnvironments.apiKey)")!
         }
         
-        return URL(string: "https://api.themoviedb.org/3/\(endPoint)")!
+        return URL(string: "https://api.themoviedb.org/3/\(endPoint)&api_key=\(AppEnvironments.apiKey)")!
     }
     
     func apiRequest(endpoint: URL, param: Data? = nil, completion: @escaping (Result<Data, RequestErrors>) -> Void) {
@@ -55,7 +55,9 @@ struct NetworkManager {
 }
 
 enum ApiEndpoints: String {
-    case discoverTV = ""
+    case discoverTV = "/discover/tv?sort_by=popularity.desc&page"
+    case discoverMovie = "/discover/movie?sort_by=popularity.desc&page"
+    case topRatedTV = "/tv/top_rated?page"
 }
 
 enum RequestErrors: Error {
