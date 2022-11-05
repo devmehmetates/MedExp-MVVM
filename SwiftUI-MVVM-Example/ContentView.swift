@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var currentTab: String = "Home"
     @State private var movieList: [Movie] = []
+    @State private var movieList2: [Movie] = []
+    @State private var movieList3: [Movie] = []
     
     var body: some View {
         TabView(selection: $currentTab) {
@@ -23,8 +25,9 @@ struct ContentView: View {
                             .frame(width: 92.0.responsizeW, height: 40.0.responsizeW)
                             .cornerRadius(10)
                             .padding(.bottom)
-                        MovieListSection(movieList: movieList, sectionTitle: "Horror")
-                        MovieListSection(movieList: movieList, sectionTitle: "Fantastic")
+                        MovieListSection(movieList: movieList3, sectionTitle: "Top Rated")
+                        MovieListSection(movieList: movieList, sectionTitle: "On TV")
+                        MovieListSection(movieList: movieList2, sectionTitle: "Movies")
                     }
                 }.navigationTitle("What's Popular")
                     .onAppear {
@@ -39,6 +42,27 @@ struct ContentView: View {
                                         print("Error")
                                     }
                                 }
+                                
+                                NetworkManager.shared.apiRequest(endpoint: NetworkManager.shared.createRequestURL(ApiEndpoints.discoverMovie.rawValue, page: 1)) { response in
+                                    switch response {
+                                    case .success(let data):
+                                        guard let movieListResponse: MovieList = data.decodedModel() else { return }
+                                        movieList2 = movieListResponse.movieList
+                                    case .failure:
+                                        print("Error")
+                                    }
+                                }
+                                
+                                NetworkManager.shared.apiRequest(endpoint: NetworkManager.shared.createRequestURL(ApiEndpoints.topRatedTV.rawValue, page: 1)) { response in
+                                    switch response {
+                                    case .success(let data):
+                                        guard let movieListResponse: MovieList = data.decodedModel() else { return }
+                                        movieList3 = movieListResponse.movieList
+                                    case .failure:
+                                        print("Error")
+                                    }
+                                }
+
                             }
                         }
                     }
@@ -109,18 +133,24 @@ struct MovieListSection: View {
 
 struct Movie: Codable, Identifiable {
     let id: Double
+    private let originalName: String?
     private let originalTitle: String?
-    private let vote_average: Double?
-    private let backdrop_path: String?
-    private let poster_path: String?
+    private let voteAverage: Double?
+    private let backdropPath: String?
+    private let posterPath: String?
     
-    var posterImage: String { NetworkManager.shared.createimageUrl(withPath: poster_path) }
-    var backdropImage: String { NetworkManager.shared.createimageUrl(withPath: backdrop_path) }
-    var title: String { originalTitle ?? "Unknowed"}
-    var point: CGFloat { (vote_average ?? 0) * 10 }
+    var posterImage: String { NetworkManager.shared.createimageUrl(withPath: posterPath) }
+    var backdropImage: String { NetworkManager.shared.createimageUrl(withPath: backdropPath) }
+    var title: String { originalName ?? originalTitle ?? "Unknowed"}
+    var point: CGFloat { (voteAverage ?? 0) * 10 }
     
     enum CodingKeys: String, CodingKey {
-        case id, originalTitle = "original_title", vote_average, backdrop_path, poster_path
+        case id
+        case originalName = "original_name"
+        case originalTitle = "original_title"
+        case voteAverage = "vote_average"
+        case backdropPath = "backdrop_path"
+        case posterPath = "poster_path"
     }
 }
 
