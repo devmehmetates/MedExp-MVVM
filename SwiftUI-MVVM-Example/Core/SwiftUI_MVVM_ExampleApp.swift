@@ -11,7 +11,7 @@ import SwiftUI
 struct SwiftUI_MVVM_ExampleApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabbarRoot()
         }
     }
 }
