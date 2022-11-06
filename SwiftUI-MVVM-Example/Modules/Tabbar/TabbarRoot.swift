@@ -12,7 +12,7 @@ struct TabbarRoot: View {
     
     var body: some View {
         TabView(selection: $currentTab) {
-            HomeView()
+            HomeView(viewModel: HomeViewModel())
                 .tag("Home")
             SearchView()
                 .tag("Search")

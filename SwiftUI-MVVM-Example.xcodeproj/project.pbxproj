@@ -20,6 +20,7 @@
 		C03B6C882917B610008E5018 /* MovieListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03B6C872917B610008E5018 /* MovieListSection.swift */; };
 		C03B6C8A2917B78E008E5018 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03B6C892917B78E008E5018 /* Movie.swift */; };
 		C03B6C8C2917B795008E5018 /* MovieList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03B6C8B2917B795008E5018 /* MovieList.swift */; };
+		C03B6C8F2917C816008E5018 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03B6C8E2917C816008E5018 /* HomeViewModel.swift */; };
 		C094A956291509F500D2BB39 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C094A955291509F500D2BB39 /* NetworkManager.swift */; };
 		C0F0B59A29157CE600BA2499 /* AppEnvironments.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F0B59929157CE600BA2499 /* AppEnvironments.swift */; };
 		C0F628262913F7980020BB59 /* SwiftUIAnimatedRingCharts in Frameworks */ = {isa = PBXBuildFile; productRef = C0F628252913F7980020BB59 /* SwiftUIAnimatedRingCharts */; };
@@ -41,6 +42,7 @@
 		C03B6C872917B610008E5018 /* MovieListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListSection.swift; sourceTree = "<group>"; };
 		C03B6C892917B78E008E5018 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		C03B6C8B2917B795008E5018 /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
+		C03B6C8E2917C816008E5018 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C094A955291509F500D2BB39 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C0F0B59929157CE600BA2499 /* AppEnvironments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironments.swift; sourceTree = "<group>"; };
 		C0FA34A12912DCBB00885E73 /* MovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardView.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				C03B6C822917B1F6008E5018 /* HomeView.swift */,
+				C03B6C8E2917C816008E5018 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				C0FA34A22912DCBB00885E73 /* MovieCardView.swift in Sources */,
 				C03B6C7F2917B1D8008E5018 /* TabbarRoot.swift in Sources */,
 				C0085F482913EB98001C174A /* AnimatedAsyncImageView.swift in Sources */,
+				C03B6C8F2917C816008E5018 /* HomeViewModel.swift in Sources */,
 				C010A56D291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
