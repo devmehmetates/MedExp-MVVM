@@ -10,12 +10,13 @@ import Foundation
 struct NetworkManager {
     static let shared: NetworkManager = NetworkManager()
     
-    func createRequestURL(_ endPoint: String, page: Int? = nil) -> URL {
-        if let page {
-            return URL(string: "https://api.themoviedb.org/3\(endPoint)=\(page)&api_key=\(AppEnvironments.apiKey)")!
-        }
+    func createRequestURL(_ endPoint: String, page: Int? = nil, query: String? = nil) -> URL {
+        let requestPage: String = page != nil ? "=\(page!)&" : ""
+        let requestQuery: String = query != nil ? "query=\(safeQuery(query: query!))" : ""
+        let apiKey: String = "&api_key=\(AppEnvironments.apiKey)"
+        print("https://api.themoviedb.org/3\(endPoint)\(requestPage)\(requestQuery)\(apiKey)")
         
-        return URL(string: "https://api.themoviedb.org/3/\(endPoint)&api_key=\(AppEnvironments.apiKey)")!
+        return URL(string: "https://api.themoviedb.org/3\(endPoint)\(requestPage)\(requestQuery)\(apiKey)")!
     }
     
     func apiRequest(endpoint: URL, param: Data? = nil, completion: @escaping (Result<Data, RequestErrors>) -> Void) {
@@ -30,27 +31,13 @@ struct NetworkManager {
             return completion(.success(data))
         }.resume()
     }
-//    func apiRequest<T: Decodable>(endPoint: ApiEndpoints, page: Int? = nil, method: HttpMethods? = .get, completion: @escaping (Result<T, RequestErrors>) -> Void){
-//        DispatchQueue.main.async {
-//            var request = URLRequest(url: apiURLGenerator(endPoint.rawValue, page: page))
-//            request.httpMethod = method?.rawValue
-//            request.setValue("899f5edccc021bb929f278c024a08d29", forHTTPHeaderField: "api_key")
-//
-//            guard let method else { return nil }
-//            switch method {
-//            case .get:
-//                URLSession.shared.dataTask(with: request) { data, response, error in
-//                    guard let data = data, let decodedData: T = data.decodedModel() else { return completion(.failure(.unknowed)) }
-//                    return completion(.success(decodedData))
-//                }.resume()
-//            case .post:
-//                print("hi")
-//
-//        }
-//    }
     
     func createimageUrl(withPath path: String?) -> String {
         "https://www.themoviedb.org/t/p/original\(path ?? "")"
+    }
+    
+    private func safeQuery(query: String) -> String {
+        query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
     }
 }
 
@@ -58,6 +45,8 @@ enum ApiEndpoints: String {
     case discoverTV = "/discover/tv?sort_by=popularity.desc&page"
     case discoverMovie = "/discover/movie?sort_by=popularity.desc&page"
     case topRatedTV = "/tv/top_rated?page"
+    case search = "/search/movie?page"
+   
 }
 
 enum RequestErrors: Error {
