@@ -13,6 +13,7 @@ struct AnimatedAsyncImageView: View {
     }
     
     let path: String
+    var cornerRadius: Double?
     
     var body: some View {
         GeometryReader { proxy in
@@ -21,20 +22,13 @@ struct AnimatedAsyncImageView: View {
                     image.resizable()
                         .scaledToFill()
                         .clipped()
-                } else if phase.error != nil {
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .background(.ultraThickMaterial)
-                        Image(systemName: "xmark")
-                    }
                 } else {
                     Rectangle()
                         .foregroundColor(.clear)
                         .background(.ultraThickMaterial)
                 }
             }.frame(width: proxy.size.width, height: proxy.size.height, alignment: .center)
-                .cornerRadius(10.0)
+                .cornerRadius(cornerRadius ?? 10.0)
         }
     }
 }
