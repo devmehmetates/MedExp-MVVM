@@ -14,11 +14,13 @@ struct Movie: Codable, Identifiable {
     private let voteAverage: Double?
     private let backdropPath: String?
     private let posterPath: String?
+    private let overView: String?
     
     var posterImage: String { NetworkManager.shared.createimageUrl(withPath: posterPath) }
     var backdropImage: String { NetworkManager.shared.createimageUrl(withPath: backdropPath) }
     var title: String { originalName ?? originalTitle ?? "Unknowed"}
     var point: CGFloat { (voteAverage ?? 0) * 10 }
+    var overview: String { overView ?? "Unknowed" }
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -27,5 +29,6 @@ struct Movie: Codable, Identifiable {
         case voteAverage = "vote_average"
         case backdropPath = "backdrop_path"
         case posterPath = "poster_path"
+        case overView = "overview"
     }
 }
