@@ -21,7 +21,7 @@ struct TabbarRoot: View {
                 TabbarButton(currentTab: $currentTab, title: "Home", icon: "rectangle.portrait")
                 TabbarButton(currentTab: $currentTab, title: "Search", icon: "magnifyingglass")
             }
-        }
+        }.ignoresSafeArea(.keyboard, edges: .bottom)
     }
 }
 
