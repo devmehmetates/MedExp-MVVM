@@ -14,7 +14,7 @@ struct TabbarRoot: View {
         TabView(selection: $currentTab) {
             HomeView(viewModel: HomeViewModel())
                 .tag("Home")
-            SearchView()
+            SearchView(viewModel: SearchViewModel())
                 .tag("Search")
         }.overlay(alignment: .bottom) {
             HStack {

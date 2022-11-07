@@ -7,42 +7,28 @@
 
 import SwiftUI
 
-struct SearchView: View {
-    @State private var searchKey: String = ""
-    @State private var searchList: [Movie] = []
+struct SearchView<Model>: View where Model: SearchViewModelProtocol {
+    @ObservedObject var viewModel: Model
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(searchList) { movie in
-                    SearchMovieCardView(destination: AnyView(VStack { }), backdropPath: movie.backdropImage, imagePath: movie.posterImage, title: movie.title, overview: movie.overview, year: "2021")
+                ForEach(Array(zip(viewModel.searchList.indices, viewModel.searchList)), id: \.0) { index, movie in
+                    SearchMovieCardView(destination: AnyView(VStack { }), backdropPath: movie.backdropImage, imagePath: movie.posterImage, title: movie.title, overview: movie.overview, year: movie.releaseYear)
+                        .onAppear {
+                            viewModel.setPage(index)
+                        }
                 }
             }.navigationTitle("Search")
-                .searchable(text: $searchKey)
-                .onChange(of: searchKey) { newKey in
-                    Task {
-                        DispatchQueue.main.async {
-                            let url = NetworkManager.shared.createRequestURL(ApiEndpoints.search.rawValue, page: 1, query: newKey)
-                            NetworkManager.shared.apiRequest(endpoint: url) { response in
-                                switch response {
-                                    
-                                case .success(let data):
-                                    guard let decodedData: MovieList = data.decodedModel() else { return }
-                                    self.searchList = decodedData.movieList
-                                case .failure(let err):
-                                    print(err)
-                                }
-                            }
-                        }
-                    }
-                }
+                .listStyle(.plain)
+                .searchable(text: $viewModel.searchKey)
         }
     }
 }
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        SearchView(viewModel: SearchViewModel())
     }
 }
 
@@ -85,6 +71,6 @@ struct SearchMovieCardView: View {
                     .foregroundColor(backgroundColor)
                     .opacity(0.8)
             })
-
     }
 }
+

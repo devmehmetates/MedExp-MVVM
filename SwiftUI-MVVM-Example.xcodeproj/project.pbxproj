@@ -25,6 +25,8 @@
 		C0F0B59A29157CE600BA2499 /* AppEnvironments.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F0B59929157CE600BA2499 /* AppEnvironments.swift */; };
 		C0F628262913F7980020BB59 /* SwiftUIAnimatedRingCharts in Frameworks */ = {isa = PBXBuildFile; productRef = C0F628252913F7980020BB59 /* SwiftUIAnimatedRingCharts */; };
 		C0FA34A22912DCBB00885E73 /* MovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FA34A12912DCBB00885E73 /* MovieCardView.swift */; };
+		C0FC605C2918F48A00643C93 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FC605B2918F48A00643C93 /* SearchViewModel.swift */; };
+		C0FC605E2918F52100643C93 /* RequestAbleMovieListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FC605D2918F52100643C93 /* RequestAbleMovieListProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		C094A955291509F500D2BB39 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C0F0B59929157CE600BA2499 /* AppEnvironments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironments.swift; sourceTree = "<group>"; };
 		C0FA34A12912DCBB00885E73 /* MovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardView.swift; sourceTree = "<group>"; };
+		C0FC605B2918F48A00643C93 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		C0FC605D2918F52100643C93 /* RequestAbleMovieListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAbleMovieListProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,7 @@
 			children = (
 				C0085F4B2913EE49001C174A /* Double + Ext.swift */,
 				C0085F4D2913EE72001C174A /* AppConstants.swift */,
+				C0FC605D2918F52100643C93 /* RequestAbleMovieListProtocol.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				C03B6C842917B495008E5018 /* SearchView.swift */,
+				C0FC605B2918F48A00643C93 /* SearchViewModel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -258,8 +264,10 @@
 			files = (
 				C03B6C8A2917B78E008E5018 /* Movie.swift in Sources */,
 				C0085F4C2913EE49001C174A /* Double + Ext.swift in Sources */,
+				C0FC605C2918F48A00643C93 /* SearchViewModel.swift in Sources */,
 				C0F0B59A29157CE600BA2499 /* AppEnvironments.swift in Sources */,
 				C03B6C8C2917B795008E5018 /* MovieList.swift in Sources */,
+				C0FC605E2918F52100643C93 /* RequestAbleMovieListProtocol.swift in Sources */,
 				C0085F4E2913EE72001C174A /* AppConstants.swift in Sources */,
 				C03B6C882917B610008E5018 /* MovieListSection.swift in Sources */,
 				C03B6C852917B495008E5018 /* SearchView.swift in Sources */,
