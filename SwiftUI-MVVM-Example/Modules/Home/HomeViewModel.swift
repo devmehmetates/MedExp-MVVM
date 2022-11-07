@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol HomeViewModelProtocol: ObservableObject {
+protocol HomeViewModelProtocol: RequestableMovieListProtocol {
     var isPageLoaded: Bool { get }
     var onTVMovieList: [Movie] { get }
     var topRatedMovieList: [Movie] { get }
@@ -83,18 +83,6 @@ class HomeViewModel: HomeViewModelProtocol {
         self.handleMovieListApiRequests(endPoint: NetworkManager.shared.createRequestURL(ApiEndpoints.discoverTV.rawValue, page: pageCountForOnTVMovieList)) { [weak self] movieList in
             DispatchQueue.main.async {
                 self?.onTVMovieList += movieList
-            }
-        }
-    }
-    
-    private func handleMovieListApiRequests(endPoint: URL, completion: ((_ movieList: [Movie]) -> Void)? = nil) {
-        NetworkManager.shared.apiRequest(endpoint: endPoint) { response in
-            switch response {
-            case .success(let data):
-                guard let decodedData: MovieList = data.decodedModel() else { return }
-                completion?(decodedData.movieList)
-            case .failure(_):
-                print("err")
             }
         }
     }
