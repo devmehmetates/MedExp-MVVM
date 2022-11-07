@@ -32,8 +32,12 @@ struct NetworkManager {
         }.resume()
     }
     
-    func createimageUrl(withPath path: String?) -> String {
-        "https://www.themoviedb.org/t/p/original\(path ?? "")"
+    func createPosterimageUrl(withPath path: String?) -> String {
+        "https://www.themoviedb.org/t/p/w342\(path ?? "")"
+    }
+    
+    func createBackdropimageUrl(withPath path: String?) -> String {
+        "https://www.themoviedb.org/t/p/w780\(path ?? "")"
     }
     
     private func safeQuery(query: String) -> String {

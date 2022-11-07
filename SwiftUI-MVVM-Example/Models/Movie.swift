@@ -17,8 +17,8 @@ struct Movie: Codable, Identifiable {
     private let overView: String?
     private let releaseDate: String?
     
-    var posterImage: String { NetworkManager.shared.createimageUrl(withPath: posterPath) }
-    var backdropImage: String { NetworkManager.shared.createimageUrl(withPath: backdropPath) }
+    var posterImage: String { NetworkManager.shared.createPosterimageUrl(withPath: posterPath) }
+    var backdropImage: String { NetworkManager.shared.createBackdropimageUrl(withPath: backdropPath) }
     var title: String { originalName ?? originalTitle ?? "Unknowed"}
     var point: CGFloat { (voteAverage ?? 0) * 10 }
     var overview: String { overView ?? "Unknowed" }
