@@ -49,8 +49,7 @@ enum ApiEndpoints: String {
     case discoverTV = "/discover/tv?sort_by=popularity.desc&page"
     case discoverMovie = "/discover/movie?sort_by=popularity.desc&page"
     case topRatedTV = "/tv/top_rated?page"
-    case search = "/search/movie?page"
-   
+    case search = "/search/multi?page"
 }
 
 enum RequestErrors: Error {
