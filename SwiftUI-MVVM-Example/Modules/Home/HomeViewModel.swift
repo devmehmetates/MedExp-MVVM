@@ -57,7 +57,11 @@ class HomeViewModel: HomeViewModelProtocol {
     }
     
     private func handletopRatedMovieList() {
-        self.handleMovieListApiRequests(endPoint: NetworkManager.shared.createRequestURL(ApiEndpoints.topRatedTV.rawValue, page: pageCountForTopRatedMovieList)) { [weak self] movieList in
+        let endpoint = NetworkManager.shared.createRequestURL(ApiEndpoints.topRatedTV.rawValue, headerParams: [
+            "page": pageCountForTopRatedMovieList,
+            "api_key": AppEnvironments.apiKey
+        ])
+        self.handleMovieListApiRequests(endPoint: endpoint) { [weak self] movieList in
             DispatchQueue.main.async {
                 guard let self else { return }
                 if self.pageCountForTopRatedMovieList == 1 {
@@ -72,7 +76,12 @@ class HomeViewModel: HomeViewModelProtocol {
     }
     
     private func handleDiscoverMovieList() {
-        self.handleMovieListApiRequests(endPoint: NetworkManager.shared.createRequestURL(ApiEndpoints.discoverMovie.rawValue, page: pageCountForDiscoverMovieList)) { [weak self] movieList in
+        let endpoint = NetworkManager.shared.createRequestURL(ApiEndpoints.discoverMovie.rawValue, headerParams: [
+            "sort_by": "popularity.desc",
+            "page": pageCountForDiscoverMovieList,
+            "api_key": AppEnvironments.apiKey
+        ])
+        self.handleMovieListApiRequests(endPoint: endpoint) { [weak self] movieList in
             DispatchQueue.main.async {
                 self?.discoverMovieList += movieList
             }
@@ -80,7 +89,12 @@ class HomeViewModel: HomeViewModelProtocol {
     }
     
     private func handleOnTvMovieList() {
-        self.handleMovieListApiRequests(endPoint: NetworkManager.shared.createRequestURL(ApiEndpoints.discoverTV.rawValue, page: pageCountForOnTVMovieList)) { [weak self] movieList in
+        let endpoint = NetworkManager.shared.createRequestURL(ApiEndpoints.discoverTV.rawValue, headerParams: [
+            "sort_by": "popularity.desc",
+            "page": pageCountForOnTVMovieList,
+            "api_key": AppEnvironments.apiKey
+        ])
+        self.handleMovieListApiRequests(endPoint: endpoint) { [weak self] movieList in
             DispatchQueue.main.async {
                 self?.onTVMovieList += movieList
             }

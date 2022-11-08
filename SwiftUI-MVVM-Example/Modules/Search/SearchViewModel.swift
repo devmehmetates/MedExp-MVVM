@@ -37,7 +37,11 @@ class SearchViewModel: SearchViewModelProtocol {
     }
     
     private func handleSearchMovie() {
-        let url = NetworkManager.shared.createRequestURL(ApiEndpoints.search.rawValue, page: page, query: searchKey)
+        let url = NetworkManager.shared.createRequestURL(ApiEndpoints.search.rawValue, headerParams: [
+            "page": page,
+            "query": searchKey,
+            "api_key": AppEnvironments.apiKey
+        ])
         handleMovieListApiRequests(endPoint: url) { [weak self] movieList in
             DispatchQueue.main.async {
                 self?.searchList += movieList

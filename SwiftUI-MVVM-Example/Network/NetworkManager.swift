@@ -10,13 +10,18 @@ import Foundation
 struct NetworkManager {
     static let shared: NetworkManager = NetworkManager()
     
-    func createRequestURL(_ endPoint: String, page: Int? = nil, query: String? = nil) -> URL {
-        let requestPage: String = page != nil ? "=\(page!)&" : ""
-        let requestQuery: String = query != nil ? "query=\(safeQuery(query: query!))" : ""
-        let apiKey: String = "&api_key=\(AppEnvironments.apiKey)"
-        print("https://api.themoviedb.org/3\(endPoint)\(requestPage)\(requestQuery)\(apiKey)")
-        
-        return URL(string: "https://api.themoviedb.org/3\(endPoint)\(requestPage)\(requestQuery)\(apiKey)")!
+    func createRequestURL(_ endpoint: String, headerParams: [String: Any]? = nil) -> URL {
+        var requestParams: String = ""
+        for (key, value) in (headerParams ?? [:]) {
+            if key == headerParams?.keys.first ?? "" {
+                requestParams += ("?\(key)=\(value)")
+            } else if key == "query" {
+                requestParams += ("&\(key)=\(safeQuery(query: value as? String ?? ""))")
+            } else {
+                requestParams += ("&\(key)=\(value)")
+            }
+        }
+        return URL(string: "https://api.themoviedb.org/3\(endpoint)\(requestParams)")!
     }
     
     func apiRequest(endpoint: URL, param: Data? = nil, completion: @escaping (Result<Data, RequestErrors>) -> Void) {
@@ -46,10 +51,10 @@ struct NetworkManager {
 }
 
 enum ApiEndpoints: String {
-    case discoverTV = "/discover/tv?sort_by=popularity.desc&page"
-    case discoverMovie = "/discover/movie?sort_by=popularity.desc&page"
-    case topRatedTV = "/tv/top_rated?page"
-    case search = "/search/multi?page"
+    case discoverTV = "/discover/tv"
+    case discoverMovie = "/discover/movie"
+    case topRatedTV = "/tv/top_rated"
+    case search = "/search/multi"
 }
 
 enum RequestErrors: Error {
@@ -60,12 +65,4 @@ enum RequestErrors: Error {
 enum HttpMethods: String {
     case get = "GET"
     case post = "POST"
-}
-
-extension Data {
-    func decodedModel<T: Decodable>() -> T? {
-        let jsonDecoder: JSONDecoder = JSONDecoder()
-        guard let decodedData = try? jsonDecoder.decode(T.self, from: self) else { return nil }
-        return decodedData
-    }
 }
