@@ -13,6 +13,8 @@
 		C010A56D291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C010A56C291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift */; };
 		C010A571291178CF00C971FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C010A570291178CF00C971FB /* Assets.xcassets */; };
 		C010A574291178CF00C971FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C010A573291178CF00C971FB /* Preview Assets.xcassets */; };
+		C0306E85291BAB1F00F448C8 /* View + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0306E84291BAB1F00F448C8 /* View + Ext.swift */; };
+		C0306E87291BAEAA00F448C8 /* HeaderCarouselMovieList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0306E86291BAEAA00F448C8 /* HeaderCarouselMovieList.swift */; };
 		C03B6C7D2917ADC0008E5018 /* TabbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03B6C7C2917ADC0008E5018 /* TabbarButton.swift */; };
 		C03B6C7F2917B1D8008E5018 /* TabbarRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03B6C7E2917B1D8008E5018 /* TabbarRoot.swift */; };
 		C03B6C832917B1F6008E5018 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03B6C822917B1F6008E5018 /* HomeView.swift */; };
@@ -38,6 +40,8 @@
 		C010A56C291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_MVVM_ExampleApp.swift; sourceTree = "<group>"; };
 		C010A570291178CF00C971FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C010A573291178CF00C971FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C0306E84291BAB1F00F448C8 /* View + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Ext.swift"; sourceTree = "<group>"; };
+		C0306E86291BAEAA00F448C8 /* HeaderCarouselMovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCarouselMovieList.swift; sourceTree = "<group>"; };
 		C03B6C7C2917ADC0008E5018 /* TabbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarButton.swift; sourceTree = "<group>"; };
 		C03B6C7E2917B1D8008E5018 /* TabbarRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarRoot.swift; sourceTree = "<group>"; };
 		C03B6C822917B1F6008E5018 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 				C0085F4D2913EE72001C174A /* AppConstants.swift */,
 				C0FC605D2918F52100643C93 /* RequestAbleMovieListProtocol.swift */,
 				C0EAD878291AC8750078DEE8 /* Data + Ext.swift */,
+				C0306E84291BAB1F00F448C8 /* View + Ext.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 				C0FA34A12912DCBB00885E73 /* MovieCardView.swift */,
 				C0085F472913EB98001C174A /* AnimatedAsyncImageView.swift */,
 				C03B6C872917B610008E5018 /* MovieListSection.swift */,
+				C0306E86291BAEAA00F448C8 /* HeaderCarouselMovieList.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -276,10 +282,12 @@
 				C03B6C882917B610008E5018 /* MovieListSection.swift in Sources */,
 				C03B6C852917B495008E5018 /* SearchView.swift in Sources */,
 				C094A956291509F500D2BB39 /* NetworkManager.swift in Sources */,
+				C0306E87291BAEAA00F448C8 /* HeaderCarouselMovieList.swift in Sources */,
 				C03B6C832917B1F6008E5018 /* HomeView.swift in Sources */,
 				C03B6C7D2917ADC0008E5018 /* TabbarButton.swift in Sources */,
 				C0FA34A22912DCBB00885E73 /* MovieCardView.swift in Sources */,
 				C03B6C7F2917B1D8008E5018 /* TabbarRoot.swift in Sources */,
+				C0306E85291BAB1F00F448C8 /* View + Ext.swift in Sources */,
 				C0085F482913EB98001C174A /* AnimatedAsyncImageView.swift in Sources */,
 				C03B6C8F2917C816008E5018 /* HomeViewModel.swift in Sources */,
 				C010A56D291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift in Sources */,
