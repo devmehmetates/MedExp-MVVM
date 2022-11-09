@@ -35,14 +35,15 @@ struct MovieCardView: View {
                     Text(title)
                         .lineLimit(3)
                         .multilineTextAlignment(.leading)
-                        .fontWeight(.bold)
                         .font(.caption2)
+                        .foregroundColor(.primary)
                     Spacer()
                     ZStack {
                         RingChartsView(values: [point], colors: [[contentPointColor, contentPointColorSecond]], ringsMaxValue: 100, lineWidth: 1.2.responsizeW)
                             .frame(width: 11.0.responsizeW, height: 11.0.responsizeW)
                         Text("%\(point.formatted())")
                             .font(.caption2)
+                            .foregroundColor(.primary)
                     }
                 }.padding(.horizontal, 11)
                     .padding(.vertical, 7)

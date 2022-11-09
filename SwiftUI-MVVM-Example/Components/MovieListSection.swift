@@ -21,12 +21,16 @@ struct MovieListSection: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
                     ForEach(Array(zip(movieList.indices, movieList)), id: \.1.id) { index, movie in
-                        MovieCardView(title: movie.title, point: movie.point, imagePath: movie.posterImage)
-                            .onAppear {
-                                if index == movieList.count - 3 {
-                                    cardOnAppear?()
+                        NavigationLink {
+                            
+                        } label: {
+                            MovieCardView(title: movie.title, point: movie.point, imagePath: movie.posterImage)
+                                .onAppear {
+                                    if index == movieList.count - 3 {
+                                        cardOnAppear?()
+                                    }
                                 }
-                            }
+                        }
                     }
                 }.padding([.horizontal, .bottom])
             }
