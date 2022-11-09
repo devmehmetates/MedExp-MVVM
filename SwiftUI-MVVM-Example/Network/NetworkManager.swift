@@ -21,7 +21,9 @@ struct NetworkManager {
                 requestParams += ("&\(key)=\(value)")
             }
         }
-        return URL(string: "https://api.themoviedb.org/3\(endpoint)\(requestParams)")!
+        
+        guard let url = URL(string: "https://api.themoviedb.org/3\(endpoint)\(requestParams)") else { return URL(string: AppConstants.shared.exampleImagePath)! }
+        return url
     }
     
     func apiRequest(endpoint: URL, param: Data? = nil, completion: @escaping (Result<Data, RequestErrors>) -> Void) {
