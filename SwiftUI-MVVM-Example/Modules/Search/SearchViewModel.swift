@@ -7,17 +7,17 @@
 
 import Foundation
 
-protocol SearchViewModelProtocol: RequestableMovieListProtocol {
-    var searchList: [Movie] { get }
+protocol SearchViewModelProtocol: RequestableMediaListProtocol {
+    var searchList: [Media] { get }
     var searchKey: String { get set }
     func setPage(_ index: Int)
 }
 
 class SearchViewModel: SearchViewModelProtocol {
-    @Published var searchList: [Movie] = []
+    @Published var searchList: [Media] = []
     @Published var page: Int = 1 {
         didSet {
-            handleSearchMovie()
+            handleSearchMedia()
         }
     }
     @Published var searchKey: String = "" {
@@ -26,7 +26,7 @@ class SearchViewModel: SearchViewModelProtocol {
             if searchKey.isEmpty {
                 page = 1
             }
-            handleSearchMovie()
+            handleSearchMedia()
         }
     }
     
@@ -36,15 +36,15 @@ class SearchViewModel: SearchViewModelProtocol {
         }
     }
     
-    private func handleSearchMovie() {
+    private func handleSearchMedia() {
         let url = NetworkManager.shared.createRequestURL(ApiEndpoints.search.rawValue, headerParams: [
             "page": page,
             "query": searchKey,
             "api_key": AppEnvironments.apiKey
         ])
-        handleMovieListApiRequests(endPoint: url) { [weak self] movieList in
+        handleMediaListApiRequests(endPoint: url) { [weak self] mediaList in
             DispatchQueue.main.async {
-                self?.searchList += movieList
+                self?.searchList += mediaList.filter { $0.title != "Unknowed" }
             }
         }
     }

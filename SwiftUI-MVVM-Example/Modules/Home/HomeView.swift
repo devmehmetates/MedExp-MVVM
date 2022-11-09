@@ -15,15 +15,15 @@ struct HomeView<Model>: View where Model: HomeViewModelProtocol {
             Group {
                 if viewModel.isPageLoaded {
                         ScrollView {
-                            HeaderCarouselMovieList(movieList: viewModel.topRatedMovieBackdropList)
-                            MovieListSection(movieList: viewModel.topRatedMovieList, sectionTitle: "Top Rated") {
-                                viewModel.setpageCountForTopRatedMovieList()
+                            HeaderCarouselMediaList(mediaList: viewModel.headerCarouselMediaList)
+                            MediaListSection(mediaList: viewModel.topRatedMediaList, sectionTitle: "Top Rated", mediaType: .movie) {
+                                viewModel.setpageCountForTopRatedMediaList()
                             }
-                            MovieListSection(movieList: viewModel.onTVMovieList, sectionTitle: "On TV") {
-                                viewModel.setpageCountForOnTVMovieList()
+                            MediaListSection(mediaList: viewModel.onTVMediaList, sectionTitle: "On TV", mediaType: .tvShow) {
+                                viewModel.setpageCountForOnTVMediaList()
                             }
-                            MovieListSection(movieList: viewModel.discoverMovieList, sectionTitle: "Movies") {
-                                viewModel.setpageCountForDiscoverMovieList()
+                            MediaListSection(mediaList: viewModel.discoverMediaList, sectionTitle: "Movies", mediaType: .movie) {
+                                viewModel.setpageCountForDiscoverMediaList()
                             }
                         }
                 } else {

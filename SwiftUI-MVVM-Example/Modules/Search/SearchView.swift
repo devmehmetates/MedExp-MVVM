@@ -13,8 +13,8 @@ struct SearchView<Model>: View where Model: SearchViewModelProtocol {
     var body: some View {
         NavigationView {
             List {
-                ForEach(Array(zip(viewModel.searchList.indices, viewModel.searchList)), id: \.0) { index, movie in
-                    SearchMovieCardView(destination: AnyView(VStack {}), movie: movie)
+                ForEach(Array(zip(viewModel.searchList.indices, viewModel.searchList)), id: \.0) { index, media in
+                    SearchMediaCardView(destination: AnyView(VStack {}), media: media)
                         .onAppear {
                             viewModel.setPage(index)
                         }

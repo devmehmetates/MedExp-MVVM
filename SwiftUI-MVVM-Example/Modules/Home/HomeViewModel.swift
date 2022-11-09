@@ -7,96 +7,96 @@
 
 import Foundation
 
-protocol HomeViewModelProtocol: RequestableMovieListProtocol {
+protocol HomeViewModelProtocol: RequestableMediaListProtocol {
     var isPageLoaded: Bool { get }
-    var onTVMovieList: [Movie] { get }
-    var topRatedMovieList: [Movie] { get }
-    var discoverMovieList: [Movie] { get }
-    var topRatedMovieBackdropList: [Movie] { get }
+    var onTVMediaList: [Media] { get }
+    var topRatedMediaList: [Media] { get }
+    var discoverMediaList: [Media] { get }
+    var headerCarouselMediaList: [Media] { get }
     
-    func setpageCountForOnTVMovieList()
-    func setpageCountForTopRatedMovieList()
-    func setpageCountForDiscoverMovieList()
+    func setpageCountForOnTVMediaList()
+    func setpageCountForTopRatedMediaList()
+    func setpageCountForDiscoverMediaList()
 }
 
 class HomeViewModel: HomeViewModelProtocol {
-    @Published var onTVMovieList: [Movie] = []
-    @Published var topRatedMovieList: [Movie] = []
-    @Published var discoverMovieList: [Movie] = []
-    @Published var topRatedMovieBackdropList: [Movie] = []
+    @Published var onTVMediaList: [Media] = []
+    @Published var topRatedMediaList: [Media] = []
+    @Published var discoverMediaList: [Media] = []
+    @Published var headerCarouselMediaList: [Media] = []
     @Published var isPageLoaded: Bool = false
-    func setpageCountForOnTVMovieList() { pageCountForOnTVMovieList < 10 ? pageCountForOnTVMovieList += 1 : nil }
-    func setpageCountForTopRatedMovieList() { pageCountForTopRatedMovieList < 10 ? pageCountForTopRatedMovieList += 1 : nil }
-    func setpageCountForDiscoverMovieList() { pageCountForDiscoverMovieList < 10 ? pageCountForDiscoverMovieList += 1 : nil }
+    func setpageCountForOnTVMediaList() { pageCountForOnTVMediaList < 10 ? pageCountForOnTVMediaList += 1 : nil }
+    func setpageCountForTopRatedMediaList() { pageCountForTopRatedMediaList < 10 ? pageCountForTopRatedMediaList += 1 : nil }
+    func setpageCountForDiscoverMediaList() { pageCountForDiscoverMediaList < 10 ? pageCountForDiscoverMediaList += 1 : nil }
     
     init() {
-        handleMovieLists()
+        handleMediaLists()
     }
     
-    private var pageCountForOnTVMovieList: Int = 1 {
+    private var pageCountForOnTVMediaList: Int = 1 {
         didSet {
-            handleOnTvMovieList()
+            handleOnTvMediaList()
         }
     }
-    private var pageCountForTopRatedMovieList: Int = 1 {
+    private var pageCountForTopRatedMediaList: Int = 1 {
         didSet {
-            handletopRatedMovieList()
+            handletopRatedMediaList()
         }
     }
-    private var pageCountForDiscoverMovieList: Int = 1 {
+    private var pageCountForDiscoverMediaList: Int = 1 {
         didSet {
-            handleDiscoverMovieList()
+            handleDiscoverMediaList()
         }
     }
     
-    private func handleMovieLists() {
-        handleOnTvMovieList()
-        handletopRatedMovieList()
-        handleDiscoverMovieList()
+    private func handleMediaLists() {
+        handleOnTvMediaList()
+        handletopRatedMediaList()
+        handleDiscoverMediaList()
        
     }
     
-    private func handletopRatedMovieList() {
+    private func handletopRatedMediaList() {
         let endpoint = NetworkManager.shared.createRequestURL(ApiEndpoints.topRatedTV.rawValue, headerParams: [
-            "page": pageCountForTopRatedMovieList,
+            "page": pageCountForTopRatedMediaList,
             "api_key": AppEnvironments.apiKey
         ])
-        self.handleMovieListApiRequests(endPoint: endpoint) { [weak self] movieList in
+        self.handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
             DispatchQueue.main.async {
                 guard let self else { return }
-                if self.pageCountForTopRatedMovieList == 1 {
-                    self.topRatedMovieBackdropList = movieList
+                if self.pageCountForTopRatedMediaList == 1 {
+                    self.headerCarouselMediaList = mediaList
                     self.isPageLoaded.toggle()
-                    self.setpageCountForTopRatedMovieList()
+                    self.setpageCountForTopRatedMediaList()
                 } else {
-                    self.topRatedMovieList += movieList
+                    self.topRatedMediaList += mediaList
                 }
             }
         }
     }
     
-    private func handleDiscoverMovieList() {
+    private func handleDiscoverMediaList() {
         let endpoint = NetworkManager.shared.createRequestURL(ApiEndpoints.discoverMovie.rawValue, headerParams: [
             "sort_by": "popularity.desc",
-            "page": pageCountForDiscoverMovieList,
+            "page": pageCountForDiscoverMediaList,
             "api_key": AppEnvironments.apiKey
         ])
-        self.handleMovieListApiRequests(endPoint: endpoint) { [weak self] movieList in
+        self.handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
             DispatchQueue.main.async {
-                self?.discoverMovieList += movieList
+                self?.discoverMediaList += mediaList
             }
         }
     }
     
-    private func handleOnTvMovieList() {
+    private func handleOnTvMediaList() {
         let endpoint = NetworkManager.shared.createRequestURL(ApiEndpoints.discoverTV.rawValue, headerParams: [
             "sort_by": "popularity.desc",
-            "page": pageCountForOnTVMovieList,
+            "page": pageCountForOnTVMediaList,
             "api_key": AppEnvironments.apiKey
         ])
-        self.handleMovieListApiRequests(endPoint: endpoint) { [weak self] movieList in
+        self.handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
             DispatchQueue.main.async {
-                self?.onTVMovieList += movieList
+                self?.onTVMediaList += mediaList
             }
         }
     }
