@@ -22,11 +22,7 @@ class SearchViewModel: SearchViewModelProtocol {
     }
     @Published var searchKey: String = "" {
         didSet {
-            searchList.removeAll()
-            if searchKey.isEmpty {
-                page = 1
-            }
-            handleSearchMedia()
+            searchKeyDidSet()
         }
     }
     
@@ -36,6 +32,15 @@ class SearchViewModel: SearchViewModelProtocol {
         }
     }
     
+    private func searchKeyDidSet() {
+        searchList.removeAll()
+        if searchKey.isEmpty {
+            page = 1
+        }
+        handleSearchMedia()
+    }
+    
+    // MARK: - Api process
     private func handleSearchMedia() {
         let url = NetworkManager.shared.createRequestURL(ApiEndpoints.search.rawValue, headerParams: [
             "page": page,

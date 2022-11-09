@@ -49,13 +49,14 @@ class HomeViewModel: HomeViewModelProtocol {
         }
     }
     
+    // MARK: - Initilize method(s)
     private func handleMediaLists() {
         handleOnTvMediaList()
         handletopRatedMediaList()
         handleDiscoverMediaList()
-       
     }
     
+    // MARK: - Api process
     private func handletopRatedMediaList() {
         let endpoint = NetworkManager.shared.createRequestURL(ApiEndpoints.topRatedTV.rawValue, headerParams: [
             "page": pageCountForTopRatedMediaList,
