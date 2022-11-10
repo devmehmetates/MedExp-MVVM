@@ -15,7 +15,8 @@ struct NetworkManager {
         let method = param != nil ? HttpMethods.post.rawValue : HttpMethods.get.rawValue
         request.httpMethod = method
         request.httpBody = param
-        request.setValue(AppEnvironments.apiKey, forHTTPHeaderField: "api_key")
+        
+        print("URL LOG:", endpoint.description)
         
         URLSession.shared.dataTask(with: request) { data, response, err in
             guard let data else { return completion(.failure(.emptyData)) }
@@ -31,6 +32,8 @@ enum ApiEndpoints: String {
     case topRatedTV = "/tv/top_rated"
     case onTheAir = "/tv/on_the_air"
     case search = "/search/multi"
+    case tvShowDetail = "/tv"
+    case movieShowDetail = "/movie"
 }
 
 // MARK: - Error(s)
@@ -58,7 +61,7 @@ extension NetworkManager {
 
 // MARK: - Request URL Function(s)
 extension NetworkManager {
-    func createRequestURL(_ endpoint: String, headerParams: [String: Any]? = nil) -> URL {
+    func createRequestURL(_ endpoint: String, pathVariables: [Int]? = nil, headerParams: [String: Any]? = nil) -> URL {
         var requestParams: String = ""
         for (key, value) in (headerParams ?? [:]) {
             if key == headerParams?.keys.first ?? "" {
@@ -70,7 +73,12 @@ extension NetworkManager {
             }
         }
         
-        guard let url = URL(string: "https://api.themoviedb.org/3\(endpoint)\(requestParams)") else { return URL(string: AppConstants.shared.exampleImagePath)! }
+        var pathVariable: String = ""
+        for variable in (pathVariables ?? []) {
+            pathVariable += "/\(variable)"
+        }
+        
+        guard let url = URL(string: "https://api.themoviedb.org/3\(endpoint)\(pathVariable)\(requestParams)") else { return URL(string: AppConstants.shared.exampleImagePath)! }
         return url
     }
     

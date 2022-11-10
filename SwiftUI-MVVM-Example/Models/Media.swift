@@ -26,7 +26,6 @@ struct Media: Codable, Identifiable {
     private let releaseDate: String?
     private let mediaType: String?
     
-    
     var isAdult: Bool { adult ?? false }
     var backdropImage: String { NetworkManager.shared.createBackdropimageUrl(withPath: backdropPath) }
     var mediaGenres: [Genres] { (genres ?? []).compactMap { $0 } }

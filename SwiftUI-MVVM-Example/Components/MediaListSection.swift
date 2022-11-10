@@ -28,7 +28,7 @@ extension MediaListSection {
             LazyHStack {
                 ForEach(Array(zip(mediaList.indices, mediaList)), id: \.1.id) { index, media in
                     NavigationLink {
-                        
+                        DetailView(viewModel: DetailViewModel(mediaId: Int(media.id), mediaType: mediaType))
                     } label: {
                         MediaCardView(media: media)
                             .onAppear {
