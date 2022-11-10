@@ -29,6 +29,7 @@ enum ApiEndpoints: String {
     case discoverTV = "/discover/tv"
     case discoverMovie = "/discover/movie"
     case topRatedTV = "/tv/top_rated"
+    case onTheAir = "/tv/on_the_air"
     case search = "/search/multi"
 }
 

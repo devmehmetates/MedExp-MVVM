@@ -16,7 +16,10 @@ struct HomeView<Model>: View where Model: HomeViewModelProtocol {
                 if viewModel.isPageLoaded {
                         ScrollView {
                             HeaderCarouselMediaList(mediaList: viewModel.headerCarouselMediaList)
-                            MediaListSection(mediaList: viewModel.topRatedMediaList, sectionTitle: "Top Rated", mediaType: .movie) {
+                            MediaListSection(mediaList: viewModel.onTheAirMediaList, sectionTitle: "On The Air", mediaType: .movie) {
+                                viewModel.setpageCountForOnTheAirMediaList()
+                            }
+                            MediaListSection(mediaList: viewModel.topRatedMediaList, sectionTitle: "Top Rated", mediaType: .tvShow) {
                                 viewModel.setpageCountForTopRatedMediaList()
                             }
                             MediaListSection(mediaList: viewModel.onTVMediaList, sectionTitle: "On TV", mediaType: .tvShow) {

@@ -18,7 +18,7 @@ struct MediaCardView: View {
                 AnimatedAsyncImageView(path: media.posterImage)
                 mediaInformationStack
             }.padding(.bottom, 7)
-        }.frame(width: 45.0.responsizeW, height: 80.0.responsizeW)
+        }.frame(width: 45.0.responsizeW, height: 85.0.responsizeW)
             .background(cardBackground)
     }
 }
