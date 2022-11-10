@@ -13,6 +13,10 @@
 		C010A56D291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C010A56C291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift */; };
 		C010A571291178CF00C971FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C010A570291178CF00C971FB /* Assets.xcassets */; };
 		C010A574291178CF00C971FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C010A573291178CF00C971FB /* Preview Assets.xcassets */; };
+		C0239F05291CF15500FA36B8 /* StickyAsyncImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C0239F04291CF15500FA36B8 /* StickyAsyncImageSwiftUI */; };
+		C0239F08291CF18E00FA36B8 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0239F07291CF18E00FA36B8 /* DetailView.swift */; };
+		C0239F0A291D189300FA36B8 /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0239F09291D189300FA36B8 /* Genres.swift */; };
+		C0239F0C291D18A300FA36B8 /* Networks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0239F0B291D18A300FA36B8 /* Networks.swift */; };
 		C0306E85291BAB1F00F448C8 /* View + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0306E84291BAB1F00F448C8 /* View + Ext.swift */; };
 		C0306E87291BAEAA00F448C8 /* HeaderCarouselMediaList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0306E86291BAEAA00F448C8 /* HeaderCarouselMediaList.swift */; };
 		C0306E89291BB17D00F448C8 /* SearchMovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0306E88291BB17D00F448C8 /* SearchMovieCardView.swift */; };
@@ -41,6 +45,9 @@
 		C010A56C291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_MVVM_ExampleApp.swift; sourceTree = "<group>"; };
 		C010A570291178CF00C971FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C010A573291178CF00C971FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C0239F07291CF18E00FA36B8 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		C0239F09291D189300FA36B8 /* Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
+		C0239F0B291D18A300FA36B8 /* Networks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networks.swift; sourceTree = "<group>"; };
 		C0306E84291BAB1F00F448C8 /* View + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Ext.swift"; sourceTree = "<group>"; };
 		C0306E86291BAEAA00F448C8 /* HeaderCarouselMediaList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCarouselMediaList.swift; sourceTree = "<group>"; };
 		C0306E88291BB17D00F448C8 /* SearchMovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieCardView.swift; sourceTree = "<group>"; };
@@ -65,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0239F05291CF15500FA36B8 /* StickyAsyncImageSwiftUI in Frameworks */,
 				C0F628262913F7980020BB59 /* SwiftUIAnimatedRingCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,9 +131,18 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		C0239F06291CF18200FA36B8 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				C0239F07291CF18E00FA36B8 /* DetailView.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		C03B6C7A2917AC09008E5018 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C0239F06291CF18200FA36B8 /* Detail */,
 				C03B6C812917B1EB008E5018 /* Search */,
 				C03B6C802917B1E5008E5018 /* Home */,
 				C03B6C7B2917AC34008E5018 /* Tabbar */,
@@ -165,6 +182,8 @@
 			children = (
 				C03B6C892917B78E008E5018 /* Media.swift */,
 				C03B6C8B2917B795008E5018 /* MediaList.swift */,
+				C0239F09291D189300FA36B8 /* Genres.swift */,
+				C0239F0B291D18A300FA36B8 /* Networks.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -216,6 +235,7 @@
 			name = "SwiftUI-MVVM-Example";
 			packageProductDependencies = (
 				C0F628252913F7980020BB59 /* SwiftUIAnimatedRingCharts */,
+				C0239F04291CF15500FA36B8 /* StickyAsyncImageSwiftUI */,
 			);
 			productName = "SwiftUI-MVVM-Example";
 			productReference = C010A569291178CE00C971FB /* SwiftUI-MVVM-Example.app */;
@@ -247,6 +267,7 @@
 			mainGroup = C010A560291178CE00C971FB;
 			packageReferences = (
 				C0F628242913F7980020BB59 /* XCRemoteSwiftPackageReference "SwiftUIAnimatedRingCharts" */,
+				C0239F03291CF15500FA36B8 /* XCRemoteSwiftPackageReference "StickyAsyncImageSwiftUI" */,
 			);
 			productRefGroup = C010A56A291178CE00C971FB /* Products */;
 			projectDirPath = "";
@@ -279,8 +300,10 @@
 				C0FC605C2918F48A00643C93 /* SearchViewModel.swift in Sources */,
 				C0EAD879291AC8750078DEE8 /* Data + Ext.swift in Sources */,
 				C0F0B59A29157CE600BA2499 /* AppEnvironments.swift in Sources */,
+				C0239F08291CF18E00FA36B8 /* DetailView.swift in Sources */,
 				C03B6C8C2917B795008E5018 /* MediaList.swift in Sources */,
 				C0FC605E2918F52100643C93 /* RequestAbleMovieListProtocol.swift in Sources */,
+				C0239F0A291D189300FA36B8 /* Genres.swift in Sources */,
 				C0085F4E2913EE72001C174A /* AppConstants.swift in Sources */,
 				C0306E89291BB17D00F448C8 /* SearchMovieCardView.swift in Sources */,
 				C03B6C882917B610008E5018 /* MediaListSection.swift in Sources */,
@@ -294,6 +317,7 @@
 				C0306E85291BAB1F00F448C8 /* View + Ext.swift in Sources */,
 				C0085F482913EB98001C174A /* AnimatedAsyncImageView.swift in Sources */,
 				C03B6C8F2917C816008E5018 /* HomeViewModel.swift in Sources */,
+				C0239F0C291D18A300FA36B8 /* Networks.swift in Sources */,
 				C010A56D291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,6 +533,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C0239F03291CF15500FA36B8 /* XCRemoteSwiftPackageReference "StickyAsyncImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devmehmetates/StickyAsyncImageSwiftUI.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		C0F628242913F7980020BB59 /* XCRemoteSwiftPackageReference "SwiftUIAnimatedRingCharts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devmehmetates/SwiftUIAnimatedRingCharts.git";
@@ -520,6 +552,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C0239F04291CF15500FA36B8 /* StickyAsyncImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0239F03291CF15500FA36B8 /* XCRemoteSwiftPackageReference "StickyAsyncImageSwiftUI" */;
+			productName = StickyAsyncImageSwiftUI;
+		};
 		C0F628252913F7980020BB59 /* SwiftUIAnimatedRingCharts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C0F628242913F7980020BB59 /* XCRemoteSwiftPackageReference "SwiftUIAnimatedRingCharts" */;
