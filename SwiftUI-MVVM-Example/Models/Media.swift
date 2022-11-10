@@ -29,7 +29,6 @@ struct Media: Codable, Identifiable {
     
     var isAdult: Bool { adult ?? false }
     var backdropImage: String { NetworkManager.shared.createBackdropimageUrl(withPath: backdropPath) }
-    var firstRelaseYear: String { firstAirDate?.split(separator: "-").first?.description ?? "0" }
     var mediaGenres: [Genres] { (genres ?? []).compactMap { $0 } }
     var mediaHomePage: String { homepage ?? "" }
     var title: String { originalName ?? originalTitle ?? name ?? "Unknowed" }
@@ -39,7 +38,7 @@ struct Media: Codable, Identifiable {
     var overview: String { overView ?? "Unknowed" }
     var posterImage: String { NetworkManager.shared.createPosterimageUrl(withPath: posterPath) }
     var point: CGFloat { (voteAverage ?? 0) * 10 }
-    var releaseYear: String { releaseDate?.split(separator: "-").first?.description ?? "0" }
+    var releaseYear: String { releaseDate?.split(separator: "-").first?.description ?? firstAirDate?.split(separator: "-").first?.description ?? "Unknowed" }
     var type: MediaTypes? {
         guard let mediaType else { return nil }
         return mediaType == MediaTypes.movie.rawValue ? .movie : .tvShow
