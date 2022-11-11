@@ -10,12 +10,20 @@ import SwiftUI
 struct MediaListSection: View {
     let mediaList: [Media]
     let sectionTitle: String
-    var mediaType: MediaTypes
+    let titleFont: Font
+    let mediaType: MediaTypes
     var cardOnAppear: (() -> Void)? = nil
     
+    init(mediaList: [Media], sectionTitle: String, titleFont: Font? = nil, mediaType: MediaTypes, cardOnAppear: ( () -> Void)? = nil) {
+        self.mediaList = mediaList
+        self.sectionTitle = sectionTitle
+        self.titleFont = titleFont ?? .title2
+        self.mediaType = mediaType
+        self.cardOnAppear = cardOnAppear
+    }
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 2.0.responsizeW) {
-            sectionTitleText
+        CustomSectionView(title: sectionTitle, font: titleFont) {
             mediaHorizontalScrollList
         }
     }
@@ -41,18 +49,11 @@ extension MediaListSection {
             }.padding([.horizontal, .bottom])
         }
     }
-    
-    private var sectionTitleText: some View {
-        Text(sectionTitle)
-            .font(.title2)
-            .fontWeight(.semibold)
-            .padding(.horizontal, 5.0.responsizeW)
-    }
 }
 
 struct MediaListSection_Previews: PreviewProvider {
     static var previews: some View {
-        MediaListSection(mediaList: [], sectionTitle: "On TV", mediaType: .movie) {
+        MediaListSection(mediaList: [], sectionTitle: "On Tv", mediaType: .movie) {
             
         }
     }
