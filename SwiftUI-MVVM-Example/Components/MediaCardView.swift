@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftUIAnimatedRingCharts
 
-struct MediaCardView: View {
+struct MediaCardView: View, CardView {
     @Environment(\.colorScheme) private var colorScheme
     let media: Media
     
@@ -19,19 +19,12 @@ struct MediaCardView: View {
                 mediaInformationStack
             }.padding(.bottom, 7)
         }.frame(width: 45.0.responsizeW, height: 85.0.responsizeW)
-            .background(cardBackground)
+            .background(cardBackground(overlayLinearGradient: overlayLinearGradient, colorScheme: colorScheme))
     }
 }
 
 // MARK: View component(s)
 extension MediaCardView {
-    private var cardBackground: some View {
-        Rectangle()
-            .foregroundStyle(overlayLinearGradient)
-            .cornerRadius(12)
-            .shadow(color: .gray.opacity(0.3), radius: colorScheme == .dark ? 0 : 8)
-    }
-    
     private var mediaTitle: some View {
         Text(media.title)
             .lineLimit(3)
