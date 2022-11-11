@@ -57,11 +57,19 @@ extension NetworkManager {
     func createBackdropimageUrl(withPath path: String?) -> String {
         "https://www.themoviedb.org/t/p/w780\(path ?? "")"
     }
+    
+    func createOriginalImageUrl(withPath path: String?) -> String {
+        "https://www.themoviedb.org/t/p/original\(path ?? "")"
+    }
+    
+    func createLogoimageUrl(withPath path: String?) -> String {
+        "https://www.themoviedb.org/t/p/w92\(path ?? "")"
+    }
 }
 
 // MARK: - Request URL Function(s)
 extension NetworkManager {
-    func createRequestURL(_ endpoint: String, pathVariables: [Int]? = nil, headerParams: [String: Any]? = nil) -> URL {
+    func createRequestURL(_ endpoint: String, pathVariables: [String]? = nil, headerParams: [String: Any]? = nil) -> URL {
         var requestParams: String = ""
         for (key, value) in (headerParams ?? [:]) {
             if key == headerParams?.keys.first ?? "" {

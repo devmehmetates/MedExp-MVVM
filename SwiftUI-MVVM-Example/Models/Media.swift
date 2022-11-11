@@ -16,6 +16,7 @@ struct Media: Codable, Identifiable {
     private let homepage: String?
     private let name: String?
     private let networks: [Networks?]?
+    private let productionCompanies: [Networks?]?
     private let numberOfEpisodes: Int?
     private let numberOfSeasons: Int?
     private let originalName: String?
@@ -28,10 +29,11 @@ struct Media: Codable, Identifiable {
     
     var isAdult: Bool { adult ?? false }
     var backdropImage: String { NetworkManager.shared.createBackdropimageUrl(withPath: backdropPath) }
+    var originalBackdropImage: String { NetworkManager.shared.createOriginalImageUrl(withPath: backdropPath) }
     var mediaGenres: [Genres] { (genres ?? []).compactMap { $0 } }
     var mediaHomePage: String { homepage ?? "" }
-    var title: String { originalName ?? originalTitle ?? name ?? "Unknowed" }
-    var mediaNetworks: [Networks] { (networks ?? []).compactMap { $0 } }
+    var title: String { name ?? originalName ?? originalTitle ?? "Unknowed" }
+    var mediaNetworks: [Networks] { (networks ?? productionCompanies ?? []).compactMap { $0 } }
     var episodesCount: Int { numberOfEpisodes ?? 0 }
     var sessionCount: Int { numberOfSeasons ?? 0 }
     var overview: String { overView ?? "Unknowed" }
@@ -47,6 +49,7 @@ struct Media: Codable, Identifiable {
         case id, adult, genres, homepage, name, networks
         case backdropPath = "backdrop_path"
         case firstAirDate = "first_air_date"
+        case productionCompanies = "production_companies"
         case numberOfEpisodes = "number_of_episodes"
         case numberOfSeasons = "number_of_seasons"
         case originalName = "original_name"
