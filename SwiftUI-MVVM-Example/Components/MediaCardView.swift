@@ -37,7 +37,7 @@ extension MediaCardView {
         ZStack {
             RingChartsView(values: [media.point], colors: [[contentPointColor, contentPointColorSecond]], ringsMaxValue: 100, lineWidth: 1.2.responsizeW)
                 .frame(width: 11.0.responsizeW, height: 11.0.responsizeW)
-            Text("%\(media.point.formatted())")
+            Text("%\(Int(media.point).formatted())")
                 .font(.caption2)
                 .foregroundColor(.primary)
         }
