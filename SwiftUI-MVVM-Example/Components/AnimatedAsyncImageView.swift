@@ -14,14 +14,21 @@ struct AnimatedAsyncImageView: View {
     
     let path: String
     var cornerRadius: Double?
+    var scaleType: ScaleTypes? = .toFill
     
     var body: some View {
         GeometryReader { proxy in
             AsyncImage(url: url, transaction: .init(animation: .easeInOut)) { phase in
                 if let image = phase.image {
-                    image.resizable()
-                        .scaledToFill()
-                        .clipped()
+                    if scaleType! == .toFill {
+                        image.resizable()
+                            .scaledToFill()
+                            .clipped()
+                    } else {
+                        image.resizable()
+                            .scaledToFit()
+                            .clipped()
+                    }
                 } else {
                     Rectangle()
                         .foregroundColor(.clear)
@@ -37,4 +44,9 @@ struct AnimatedAsyncImageView_Previews: PreviewProvider {
     static var previews: some View {
         AnimatedAsyncImageView(path: AppConstants.shared.exampleImagePath)
     }
+}
+
+enum ScaleTypes {
+    case toFit
+    case toFill
 }
