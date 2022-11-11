@@ -14,7 +14,7 @@ struct SearchView<Model>: View where Model: SearchViewModelProtocol {
         NavigationView {
             List {
                 ForEach(Array(zip(viewModel.searchList.indices, viewModel.searchList)), id: \.0) { index, media in
-                    SearchMediaCardView(destination: AnyView(VStack {}), media: media)
+                    SearchMediaCardView(media: media)
                         .onAppear {
                             viewModel.setPage(index)
                         }

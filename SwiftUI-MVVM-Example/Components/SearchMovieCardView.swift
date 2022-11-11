@@ -9,12 +9,11 @@ import SwiftUI
 
 struct SearchMediaCardView: View {
     @Environment(\.colorScheme) var colorScheme
-    let destination: AnyView
     let media: Media
     
     var body: some View {
         NavigationLink {
-            destination
+            DetailView(viewModel: DetailViewModel(mediaId: Int(media.id), mediaType: media.type ?? .tvShow))
         } label: {
             cardBody
         }.listRowBackground(cardBackground)
