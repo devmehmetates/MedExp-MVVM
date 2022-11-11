@@ -22,6 +22,7 @@ struct SearchView<Model>: View where Model: SearchViewModelProtocol {
             }.navigationTitle("Search")
                 .listStyle(.plain)
                 .searchable(text: $viewModel.searchKey)
+                .disableAutocorrection(true)
                 .keyboardType(.namePhonePad)
         }
     }
