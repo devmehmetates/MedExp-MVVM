@@ -79,8 +79,10 @@ class HomeViewModel: HomeViewModelProtocol {
                     self.headerCarouselMediaList = mediaList
                     self.isPageLoaded.toggle()
                     self.setpageCountForTopRatedMediaList()
+                    self.headerCarouselMediaList = self.headerCarouselMediaList.filter { !$0.overview.isEmpty }
                 } else {
                     self.topRatedMediaList += mediaList
+                    self.topRatedMediaList = self.topRatedMediaList.filter { !$0.overview.isEmpty }
                 }
             }
         }
@@ -93,7 +95,9 @@ class HomeViewModel: HomeViewModelProtocol {
         ])
         self.handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
             DispatchQueue.main.async {
-                self?.onTheAirMediaList += mediaList
+                guard let self else { return }
+                self.onTheAirMediaList += mediaList
+                self.onTheAirMediaList = self.onTheAirMediaList.filter { !$0.overview.isEmpty }
             }
         }
     }
@@ -106,7 +110,9 @@ class HomeViewModel: HomeViewModelProtocol {
         ])
         self.handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
             DispatchQueue.main.async {
-                self?.discoverMediaList += mediaList
+                guard let self else { return }
+                self.discoverMediaList += mediaList
+                self.discoverMediaList = self.discoverMediaList.filter { !$0.overview.isEmpty }
             }
         }
     }
@@ -119,7 +125,9 @@ class HomeViewModel: HomeViewModelProtocol {
         ])
         self.handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
             DispatchQueue.main.async {
-                self?.onTVMediaList += mediaList
+                guard let self else { return }
+                self.onTVMediaList += mediaList
+                self.onTVMediaList = self.onTVMediaList.filter { !$0.overview.isEmpty }
             }
         }
     }
