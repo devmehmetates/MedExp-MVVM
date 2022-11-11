@@ -29,6 +29,9 @@
 		C03B6C8C2917B795008E5018 /* MediaList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03B6C8B2917B795008E5018 /* MediaList.swift */; };
 		C03B6C8F2917C816008E5018 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03B6C8E2917C816008E5018 /* HomeViewModel.swift */; };
 		C0443980291E4E1800EE354E /* CardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C044397F291E4E1800EE354E /* CardProtocol.swift */; };
+		C0892213291E79CB00524D9A /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0892212291E79CB00524D9A /* Actor.swift */; };
+		C0892215291E79FA00524D9A /* ActorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0892214291E79FA00524D9A /* ActorList.swift */; };
+		C0892217291E7A2F00524D9A /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0892216291E7A2F00524D9A /* Role.swift */; };
 		C094A956291509F500D2BB39 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C094A955291509F500D2BB39 /* NetworkManager.swift */; };
 		C0EAD879291AC8750078DEE8 /* Data + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EAD878291AC8750078DEE8 /* Data + Ext.swift */; };
 		C0F0B59A29157CE600BA2499 /* AppEnvironments.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F0B59929157CE600BA2499 /* AppEnvironments.swift */; };
@@ -61,6 +64,9 @@
 		C03B6C8B2917B795008E5018 /* MediaList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaList.swift; sourceTree = "<group>"; };
 		C03B6C8E2917C816008E5018 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C044397F291E4E1800EE354E /* CardProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProtocol.swift; sourceTree = "<group>"; };
+		C0892212291E79CB00524D9A /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
+		C0892214291E79FA00524D9A /* ActorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorList.swift; sourceTree = "<group>"; };
+		C0892216291E7A2F00524D9A /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
 		C094A955291509F500D2BB39 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C0EAD878291AC8750078DEE8 /* Data + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Ext.swift"; sourceTree = "<group>"; };
 		C0F0B59929157CE600BA2499 /* AppEnvironments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironments.swift; sourceTree = "<group>"; };
@@ -187,6 +193,9 @@
 				C03B6C8B2917B795008E5018 /* MediaList.swift */,
 				C0239F09291D189300FA36B8 /* Genres.swift */,
 				C0239F0B291D18A300FA36B8 /* Networks.swift */,
+				C0892212291E79CB00524D9A /* Actor.swift */,
+				C0892214291E79FA00524D9A /* ActorList.swift */,
+				C0892216291E7A2F00524D9A /* Role.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -309,7 +318,9 @@
 				C0FC605E2918F52100643C93 /* RequestAbleMovieListProtocol.swift in Sources */,
 				C0239F0A291D189300FA36B8 /* Genres.swift in Sources */,
 				C0085F4E2913EE72001C174A /* AppConstants.swift in Sources */,
+				C0892215291E79FA00524D9A /* ActorList.swift in Sources */,
 				C0306E89291BB17D00F448C8 /* SearchMovieCardView.swift in Sources */,
+				C0892213291E79CB00524D9A /* Actor.swift in Sources */,
 				C03B6C882917B610008E5018 /* MediaListSection.swift in Sources */,
 				C03B6C852917B495008E5018 /* SearchView.swift in Sources */,
 				C094A956291509F500D2BB39 /* NetworkManager.swift in Sources */,
@@ -321,6 +332,7 @@
 				C0306E85291BAB1F00F448C8 /* View + Ext.swift in Sources */,
 				C0085F482913EB98001C174A /* AnimatedAsyncImageView.swift in Sources */,
 				C03B6C8F2917C816008E5018 /* HomeViewModel.swift in Sources */,
+				C0892217291E7A2F00524D9A /* Role.swift in Sources */,
 				C0239F0C291D18A300FA36B8 /* Networks.swift in Sources */,
 				C010A56D291178CE00C971FB /* SwiftUI_MVVM_ExampleApp.swift in Sources */,
 			);
