@@ -14,8 +14,17 @@ struct LogoImageView: View {
     
     var body: some View {
         HStack {
-            AnimatedAsyncImageView(path: imagePath, cornerRadius: 0, scaleType: .toFit)
-                .frame(width: 10.0.responsizeW, height: 10.0.responsizeW)
+            if !imagePath.isEmpty {
+                AnimatedAsyncImageView(path: imagePath, cornerRadius: 0, scaleType: .toFit)
+                    .frame(width: 10.0.responsizeW, height: 10.0.responsizeW)
+            } else {
+                VStack {
+                    Image(systemName: "globe")
+                        .resizable()
+                        .foregroundColor(.primary)
+                        .frame(width: 5.0.responsizeW, height: 5.0.responsizeW)
+                }.frame(width: 10.0.responsizeW, height: 10.0.responsizeW)
+            }
         }.padding(1.0.responsizeW)
             .background(backgroundColor)
             .cornerRadius(5)
