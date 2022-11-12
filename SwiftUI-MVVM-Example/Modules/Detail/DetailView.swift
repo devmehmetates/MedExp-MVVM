@@ -87,21 +87,17 @@ extension DetailView {
                     Text(media.releaseYear)
                         .font(.footnote)
                     Spacer()
-                    if let mediaHomePage: URL = URL(string: media.mediaHomePage) {
+                    if let mediaHomePage: URL = URL(string: media.mediaHomePage), let logoPath = media.mediaNetworks.first?.logoImagePath {
                         Button {
                             openURL(mediaHomePage)
                         } label: {
-                            LogoImageView(imagePath: media.mediaNetworks.first?.logoImagePath ?? "")
+                            LogoImageView(imagePath: logoPath)
                         }
                     }
                 }
                 Spacer()
             }.padding(.horizontal)
                 .frame(height: 40.0.responsizeW)
-        }.overlay(alignment: .bottom) {
-            Divider()
-                .offset(y: 4.0.responsizeW)
-                .padding(.horizontal)
         }
     }
 }
