@@ -11,7 +11,7 @@ struct Networks: Codable, Identifiable {
     private let logoPath: String?
     
     var networkName: String { name ?? "" }
-    var logoImagePath: String { NetworkManager.shared.createLogoimageUrl(withPath: logoPath) }
+    var logoImagePath: String { logoPath != nil ? NetworkManager.shared.createLogoimageUrl(withPath: logoPath) : "" }
     
     enum CodingKeys: String, CodingKey {
         case id, name
