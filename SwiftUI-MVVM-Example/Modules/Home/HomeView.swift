@@ -14,21 +14,18 @@ struct HomeView<Model>: View where Model: HomeViewModelProtocol {
         NavigationView {
             Group {
                 if viewModel.isPageLoaded {
-                        ScrollView {
-                            HeaderCarouselMediaList(mediaList: viewModel.headerCarouselMediaList)
-                            MediaListSection(mediaList: viewModel.onTheAirMediaList, sectionTitle: "On The Air", mediaType: .tvShow) {
-                                viewModel.setpageCountForOnTheAirMediaList()
-                            }
-                            MediaListSection(mediaList: viewModel.topRatedMediaList, sectionTitle: "Top Rated", mediaType: .tvShow) {
-                                viewModel.setpageCountForTopRatedMediaList()
-                            }
-                            MediaListSection(mediaList: viewModel.onTVMediaList, sectionTitle: "On TV", mediaType: .tvShow) {
-                                viewModel.setpageCountForOnTVMediaList()
-                            }
-                            MediaListSection(mediaList: viewModel.discoverMediaList, sectionTitle: "Movies", mediaType: .movie) {
-                                viewModel.setpageCountForDiscoverMediaList()
+                    ScrollView {
+                        if let headerMediaList: [Media] = viewModel.mediaSections["Popular on TV"]?.mediaList {
+                            HeaderCarouselMediaList(mediaList: headerMediaList)
+                        }
+                        ForEach(Array(viewModel.mediaSections.keys).sorted(), id: \.self) { sectionKey in
+                            if let mediaSectionValue: MediaSectionValue = viewModel.mediaSections[sectionKey] {
+                                MediaListSection(mediaList: mediaSectionValue.mediaList, sectionTitle: sectionKey, mediaType: mediaSectionValue.type) {
+                                    viewModel.increasePage(withSectionKey: sectionKey)
+                                }
                             }
                         }
+                    }
                 } else {
                     createLoadingState()
                 }

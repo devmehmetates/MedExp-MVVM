@@ -8,127 +8,93 @@
 import Foundation
 
 protocol HomeViewModelProtocol: RequestableMediaListProtocol {
+    var mediaSections: [String: MediaSectionValue] { get }
     var isPageLoaded: Bool { get }
-    var onTVMediaList: [Media] { get }
-    var topRatedMediaList: [Media] { get }
-    var onTheAirMediaList: [Media] { get }
-    var discoverMediaList: [Media] { get }
-    var headerCarouselMediaList: [Media] { get }
     
-    func setpageCountForOnTVMediaList()
-    func setpageCountForTopRatedMediaList()
-    func setpageCountForOnTheAirMediaList()
-    func setpageCountForDiscoverMediaList()
+    func increasePage(withSectionKey key: String)
 }
 
 class HomeViewModel: HomeViewModelProtocol {
-    @Published var onTVMediaList: [Media] = []
-    @Published var topRatedMediaList: [Media] = []
-    @Published var onTheAirMediaList: [Media] = []
-    @Published var discoverMediaList: [Media] = []
-    @Published var headerCarouselMediaList: [Media] = []
+    @Published var mediaSections: [String: MediaSectionValue] = [:]
     @Published var isPageLoaded: Bool = false
-    func setpageCountForOnTVMediaList() { pageCountForOnTVMediaList < 10 ? pageCountForOnTVMediaList += 1 : nil }
-    func setpageCountForTopRatedMediaList() { pageCountForTopRatedMediaList < 10 ? pageCountForTopRatedMediaList += 1 : nil }
-    func setpageCountForOnTheAirMediaList() { pageCountForOnTheAirMediaList < 10 ? pageCountForOnTheAirMediaList += 1 : nil }
-    func setpageCountForDiscoverMediaList() { pageCountForDiscoverMediaList < 10 ? pageCountForDiscoverMediaList += 1 : nil }
     
     init() {
-        handleMediaLists()
+        sectionInit()
     }
-    
-    private var pageCountForOnTVMediaList: Int = 1 {
-        didSet {
-            handleOnTvMediaList()
-        }
-    }
-    private var pageCountForTopRatedMediaList: Int = 1 {
-        didSet {
-            handleTopRatedMediaList()
-        }
-    }
-    private var pageCountForOnTheAirMediaList: Int = 1 {
-        didSet {
-            handleOnTheAirMediaList()
-        }
-    }
-    private var pageCountForDiscoverMediaList: Int = 1 {
-        didSet {
-            handleDiscoverMediaList()
-        }
-    }
-    
-    // MARK: - Initilize method(s)
-    private func handleMediaLists() {
-        handleOnTvMediaList()
-        handleTopRatedMediaList()
-        handleOnTheAirMediaList()
-        handleDiscoverMediaList()
-    }
-    
-    // MARK: - Api process
-    private func handleTopRatedMediaList() {
-        let endpoint = NetworkManager.shared.createRequestURL(ApiEndpoints.topRatedTV.rawValue, headerParams: [
-            "page": pageCountForTopRatedMediaList,
-            "api_key": AppEnvironments.apiKey
-        ])
-        self.handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
-            DispatchQueue.main.async {
-                guard let self else { return }
-                if self.pageCountForTopRatedMediaList == 1 {
-                    self.headerCarouselMediaList = mediaList
-                    self.isPageLoaded.toggle()
-                    self.setpageCountForTopRatedMediaList()
-                    self.headerCarouselMediaList = self.headerCarouselMediaList.filter { !$0.overview.isEmpty }
-                } else {
-                    self.topRatedMediaList += mediaList
-                    self.topRatedMediaList = self.topRatedMediaList.filter { !$0.overview.isEmpty }
+}
+
+// MARK: - Api process
+extension HomeViewModel {
+    private func sectionInit() {
+        for (mediaSectionKey, mediaSectionValues) in mediaSectionInitilizer {
+            let endpoint: URL = createSectionEndpoint(sectionKey: mediaSectionValues.endpoint, page: 1)
+            handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
+                DispatchQueue.main.async {
+                    self?.mediaSections[mediaSectionKey] = MediaSectionValue(mediaList: mediaList, page: 1, type: mediaSectionValues.type)
+                    self?.filtMediaListQuality(mediaSectionKey)
+                    self?.isPageLoaded = true
                 }
             }
         }
     }
     
-    private func handleOnTheAirMediaList() {
-        let endpoint = NetworkManager.shared.createRequestURL(ApiEndpoints.onTheAir.rawValue, headerParams: [
-            "page": pageCountForOnTheAirMediaList,
+    private func createSectionEndpoint(sectionKey key: String, page: Int, pathVariables: [String]? = nil) -> URL {
+        NetworkManager.shared.createRequestURL(key, pathVariables: pathVariables, headerParams: [
+            "page": page,
             "api_key": AppEnvironments.apiKey
         ])
-        self.handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
-            DispatchQueue.main.async {
-                guard let self else { return }
-                self.onTheAirMediaList += mediaList
-                self.onTheAirMediaList = self.onTheAirMediaList.filter { !$0.overview.isEmpty }
-            }
-        }
     }
     
-    private func handleDiscoverMediaList() {
-        let endpoint = NetworkManager.shared.createRequestURL(ApiEndpoints.discoverMovie.rawValue, headerParams: [
-            "sort_by": "popularity.desc",
-            "page": pageCountForDiscoverMediaList,
-            "api_key": AppEnvironments.apiKey
-        ])
-        self.handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
+    private func updateSection(_ key: String, endpointRawValue: String, page: Int) {
+        let endpoint: URL = createSectionEndpoint(sectionKey: endpointRawValue, page: page)
+        handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
             DispatchQueue.main.async {
-                guard let self else { return }
-                self.discoverMediaList += mediaList
-                self.discoverMediaList = self.discoverMediaList.filter { !$0.overview.isEmpty }
+                self?.mediaSections[key]?.mediaList += mediaList
+                self?.filtMediaListQuality(key)
             }
         }
     }
-    
-    private func handleOnTvMediaList() {
-        let endpoint = NetworkManager.shared.createRequestURL(ApiEndpoints.discoverTV.rawValue, headerParams: [
-            "sort_by": "popularity.desc",
-            "page": pageCountForOnTVMediaList,
-            "api_key": AppEnvironments.apiKey
-        ])
-        self.handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
-            DispatchQueue.main.async {
-                guard let self else { return }
-                self.onTVMediaList += mediaList
-                self.onTVMediaList = self.onTVMediaList.filter { !$0.overview.isEmpty }
-            }
-        }
+}
+
+// MARK: - Request Properties
+extension HomeViewModel {
+    private var mediaSectionInitilizer: [String: MediaSectionInitilizerValue] {
+        [
+            "Popular on TV": MediaSectionInitilizerValue(endpoint: ApiEndpoints.popularOnTV.rawValue, type: .tvShow),
+            "Top Rated on TV": MediaSectionInitilizerValue(endpoint: ApiEndpoints.topRatedTV.rawValue, type: .tvShow),
+            "Popular Movies": MediaSectionInitilizerValue(endpoint: ApiEndpoints.popularMovies.rawValue, type: .movie),
+            "Top Rated Movies": MediaSectionInitilizerValue(endpoint: ApiEndpoints.topRatedMovies.rawValue, type: .movie),
+            "Trending Movies": MediaSectionInitilizerValue(endpoint: ApiEndpoints.trendingMovie.rawValue, type: .movie),
+            "Trending TV": MediaSectionInitilizerValue(endpoint: ApiEndpoints.trendingTv.rawValue, type: .tvShow)
+        ]
     }
+}
+
+// MARK: - Interface Properties
+extension HomeViewModel {
+    func increasePage(withSectionKey key: String) {
+        mediaSections[key]?.page += 1
+        let page = mediaSections[key]?.page ?? 0
+        guard page < 10 else { return }
+        let endpointRawValue = mediaSectionInitilizer[key]?.endpoint ?? ""
+        updateSection(key, endpointRawValue: endpointRawValue, page: page)
+    }
+}
+
+// MARK: - Filter Logic
+extension HomeViewModel {
+    private func filtMediaListQuality(_ key: String) {
+        mediaSections[key]?.mediaList = mediaSections[key]?.mediaList.filter { !$0.overview.isEmpty } ?? []
+    }
+}
+
+struct MediaSectionValue {
+    var mediaList: [Media]
+    var page: Int
+    var type: MediaTypes
+}
+
+struct MediaSectionInitilizerValue {
+    var endpoint: String
+    var type: MediaTypes
 }

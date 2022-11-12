@@ -27,11 +27,17 @@ struct NetworkManager {
 
 // MARK: - Endpoint(s)
 enum ApiEndpoints: String {
-    case discoverTV = "/discover/tv"
-    case discoverMovie = "/discover/movie"
+    // Discover Tab
+    case popularOnTV = "/tv/popular"
+    case popularMovies = "/movie/popular"
     case topRatedTV = "/tv/top_rated"
-    case onTheAir = "/tv/on_the_air"
+    case topRatedMovies = "/movie/top_rated"
+    // Trending Tab
+    case trendingMovie = "/trending/movie/week"
+    case trendingTv = "/trending/tv/week"
+    // Search Tab
     case search = "/search/multi"
+    // DetailPage
     case tvShowDetail = "/tv"
     case movieShowDetail = "/movie"
 }
