@@ -15,7 +15,7 @@ struct CustomSectionView<Content: View> : View {
     init(title: String, font: Font? = nil, @ViewBuilder content: @escaping () -> Content) {
         self.title = title
         self.content = content()
-        self.titleFont = font ?? .largeTitle
+        self.titleFont = font ?? .title
     }
     
     var body: some View {

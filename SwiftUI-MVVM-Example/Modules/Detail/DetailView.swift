@@ -11,12 +11,13 @@ import StickyAsyncImageSwiftUI
 struct DetailView<Model>: View where Model: DetailViewModelProtocol {
     @ObservedObject var viewModel: Model
     @Environment(\.openURL) var openURL
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         Group {
             if let media = viewModel.mediaDetail {
                 ScrollView {
-                    StickyAsyncImageSwiftUI(url: URL(string: media.originalBackdropImage), size: 50.0.responsizeW, coordinateSpace: "sticky")
+                    StickyAsyncImageSwiftUI(url: URL(string: media.originalBackdropImage), size: 50.0.responsizeW, coordinateSpace: "sticky", isGradientOn: true, linearGradient: overlayLinearGradient)
                     createImageHeaderInformationStack(media: media)
                     VStack(spacing: 3.0.responsizeW) {
                         if !media.overview.isEmpty {
@@ -49,7 +50,7 @@ struct DetailView<Model>: View where Model: DetailViewModelProtocol {
                             }
                         }
                         if !viewModel.recommendedMedia.isEmpty {
-                            MediaListSection(mediaList: viewModel.recommendedMedia, sectionTitle: "You May Like", titleFont: .largeTitle, mediaType: viewModel.mediaType)
+                            MediaListSection(mediaList: viewModel.recommendedMedia, sectionTitle: "You May Like", titleFont: .title, mediaType: viewModel.mediaType)
                         }
                     }
                 }.coordinateSpace(name: "sticky")
@@ -103,4 +104,16 @@ extension DetailView {
                 .padding(.horizontal)
         }
     }
+}
+
+// MARK: - Color Properties
+extension DetailView {
+    private var overlayLinearGradient: LinearGradient {
+        LinearGradient(
+            colors: [backgroundColor.opacity(0.5), backgroundColor],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+    }
+    private var backgroundColor: Color { colorScheme == .dark ? .black : .white }
 }
