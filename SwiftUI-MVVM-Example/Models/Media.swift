@@ -27,6 +27,27 @@ struct Media: Codable, Identifiable {
     private let releaseDate: String?
     private let mediaType: String?
     
+    init() {
+        self.id = 0
+        self.adult = nil
+        self.backdropPath = nil
+        self.firstAirDate = nil
+        self.genres = nil
+        self.homepage = nil
+        self.name = nil
+        self.networks = nil
+        self.productionCompanies = nil
+        self.numberOfEpisodes = nil
+        self.numberOfSeasons = nil
+        self.originalName = nil
+        self.originalTitle = nil
+        self.overView = nil
+        self.posterPath = nil
+        self.voteAverage = nil
+        self.releaseDate = nil
+        self.mediaType = nil
+    }
+    
     var isAdult: Bool { adult ?? false }
     var backdropImage: String { NetworkManager.shared.createBackdropimageUrl(withPath: backdropPath) }
     var originalBackdropImage: String { NetworkManager.shared.createOriginalImageUrl(withPath: backdropPath) }

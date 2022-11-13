@@ -16,48 +16,9 @@ struct DetailView<Model>: View where Model: DetailViewModelProtocol {
     var body: some View {
         Group {
             if let media = viewModel.mediaDetail {
-                ScrollView {
-                    StickyAsyncImageSwiftUI(url: URL(string: media.originalBackdropImage), size: 50.0.responsizeW, coordinateSpace: "sticky", isGradientOn: true, linearGradient: overlayLinearGradient)
-                    createImageHeaderInformationStack(media: media)
-                    LazyVStack(spacing: 3.0.responsizeW) {
-                        if !media.overview.isEmpty {
-                            CustomSectionView(title: "Overview") {
-                                Text(media.overview)
-                                    .font(.caption)
-                                    .padding(.horizontal)
-                            }
-                        }
-                        if !viewModel.mediaActors.isEmpty {
-                            CustomSectionView(title: "Actors") {
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    LazyHStack {
-                                        ForEach(viewModel.mediaActors) { mediaActor in
-                                            ActorCardView(actor: mediaActor)
-                                        }
-                                    }.padding([.horizontal, .bottom])
-                                }
-                            }
-                        }
-                        if !viewModel.mediaVideos.isEmpty {
-                            CustomSectionView(title: "Videos") {
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    LazyHStack {
-                                        ForEach(viewModel.mediaVideos) { mediaVideo in
-                                            YoutubeVideoView(mediaVideo.videoLink)
-                                        }
-                                    }.padding([.horizontal, .bottom])
-                                }
-                            }
-                        }
-                        if !viewModel.recommendedMedia.isEmpty {
-                            MediaListSection(mediaList: viewModel.recommendedMedia, sectionTitle: "You May Like", titleFont: .title, mediaType: viewModel.mediaType)
-                        }
-                    }
-                }.coordinateSpace(name: "sticky")
-                    .ignoresSafeArea(edges: .top)
-                    
+                createLoadedState(media: media)
             } else {
-                loadingState
+                createLoadedState(media: Media()).redacted(reason: .placeholder)
             }
         }
     }
@@ -71,7 +32,29 @@ struct DetailView_Previews: PreviewProvider {
 
 // MARK: - View Components
 extension DetailView {
-    func createImageHeaderInformationStack(media: Media) -> some View {
+    private func createLoadedState(media: Media) -> some View {
+        ScrollView {
+            StickyAsyncImageSwiftUI(url: URL(string: media.originalBackdropImage), size: 50.0.responsizeW, coordinateSpace: "sticky", isGradientOn: true, linearGradient: overlayLinearGradient)
+            createImageHeaderInformationStack(media: media)
+            LazyVStack(spacing: 3.0.responsizeW) {
+                if !media.overview.isEmpty {
+                    createOverViewStack(media: media)
+                }
+                if !viewModel.mediaActors.isEmpty {
+                    createActorsStack(media: media)
+                }
+                if !viewModel.mediaVideos.isEmpty {
+                    createVideosStack(media: media)
+                }
+                if !viewModel.recommendedMedia.isEmpty {
+                    youMayLikeStack
+                }
+            }
+        }.coordinateSpace(name: "sticky")
+            .ignoresSafeArea(edges: .top)
+    }
+    
+    private func createImageHeaderInformationStack(media: Media) -> some View {
         VStack {
             HStack {
                 AnimatedAsyncImageView(path: media.posterImage)
@@ -96,6 +79,42 @@ extension DetailView {
             }.padding(.horizontal)
                 .frame(height: 40.0.responsizeW)
         }
+    }
+
+    private func createOverViewStack(media: Media) -> some View {
+        CustomSectionView(title: "Overview") {
+            Text(media.overview)
+                .font(.caption)
+                .padding(.horizontal)
+        }
+    }
+    
+    private func createActorsStack(media: Media) -> some View {
+        CustomSectionView(title: "Actors") {
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack {
+                    ForEach(viewModel.mediaActors) { mediaActor in
+                        ActorCardView(actor: mediaActor)
+                    }
+                }.padding([.horizontal, .bottom])
+            }
+        }
+    }
+    
+    private func createVideosStack(media: Media) -> some View {
+        CustomSectionView(title: "Videos") {
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack {
+                    ForEach(viewModel.mediaVideos) { mediaVideo in
+                        YoutubeVideoView(mediaVideo.videoLink)
+                    }
+                }.padding([.horizontal, .bottom])
+            }
+        }
+    }
+    
+    private var youMayLikeStack: some View {
+        MediaListSection(mediaList: viewModel.recommendedMedia, sectionTitle: "You May Like", titleFont: .title, mediaType: viewModel.mediaType)
     }
 }
 
