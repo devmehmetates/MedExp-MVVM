@@ -18,10 +18,12 @@ struct HomeView<Model>: View where Model: HomeViewModelProtocol {
                         if let headerMediaList: [Media] = viewModel.mediaSections["Popular on TV"]?.mediaList {
                             HeaderCarouselMediaList(mediaList: headerMediaList)
                         }
-                        ForEach(Array(viewModel.mediaSections.keys).sorted(), id: \.self) { sectionKey in
-                            if let mediaSectionValue: MediaSectionValue = viewModel.mediaSections[sectionKey] {
-                                MediaListSection(mediaList: mediaSectionValue.mediaList, sectionTitle: sectionKey, mediaType: mediaSectionValue.type) {
-                                    viewModel.increasePage(withSectionKey: sectionKey)
+                        LazyVStack {
+                            ForEach(Array(viewModel.mediaSections.keys).sorted(), id: \.self) { sectionKey in
+                                if let mediaSectionValue: MediaSectionValue = viewModel.mediaSections[sectionKey] {
+                                    MediaListSection(mediaList: mediaSectionValue.mediaList, sectionTitle: sectionKey, mediaType: mediaSectionValue.type) {
+                                        viewModel.increasePage(withSectionKey: sectionKey)
+                                    }
                                 }
                             }
                         }

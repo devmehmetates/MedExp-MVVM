@@ -19,7 +19,7 @@ struct DetailView<Model>: View where Model: DetailViewModelProtocol {
                 ScrollView {
                     StickyAsyncImageSwiftUI(url: URL(string: media.originalBackdropImage), size: 50.0.responsizeW, coordinateSpace: "sticky", isGradientOn: true, linearGradient: overlayLinearGradient)
                     createImageHeaderInformationStack(media: media)
-                    VStack(spacing: 3.0.responsizeW) {
+                    LazyVStack(spacing: 3.0.responsizeW) {
                         if !media.overview.isEmpty {
                             CustomSectionView(title: "Overview") {
                                 Text(media.overview)
@@ -58,9 +58,6 @@ struct DetailView<Model>: View where Model: DetailViewModelProtocol {
                     
             } else {
                 loadingState
-                    .onAppear {
-                        viewModel.handleMediaDetail()
-                    }
             }
         }
     }

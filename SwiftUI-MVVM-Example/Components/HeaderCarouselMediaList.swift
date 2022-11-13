@@ -16,7 +16,7 @@ struct HeaderCarouselMediaList: View {
         TabView {
             ForEach(mediaList, id: \.id) { media in
                 NavigationLink {
-                    DetailView(viewModel: DetailViewModel(mediaId: Int(media.id), mediaType: .tvShow))
+                    LazyNavigate(DetailView(viewModel: DetailViewModel(mediaId: Int(media.id), mediaType: .tvShow)))
                 } label: {
                     AnimatedAsyncImageView(path: media.backdropImage)
                 }

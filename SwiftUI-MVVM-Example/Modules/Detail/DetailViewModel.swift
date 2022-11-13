@@ -29,6 +29,7 @@ class DetailViewModel: DetailViewModelProtocol {
     init(mediaId: Int, mediaType: MediaTypes) {
         self.mediaId = mediaId
         self.mediaType = mediaType
+        handleMediaDetail()
     }
     
     func handleMediaDetail() {

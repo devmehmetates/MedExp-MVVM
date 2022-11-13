@@ -13,7 +13,7 @@ struct SearchMediaCardView: View {
     
     var body: some View {
         NavigationLink {
-            DetailView(viewModel: DetailViewModel(mediaId: Int(media.id), mediaType: media.type ?? .tvShow))
+            LazyNavigate(DetailView(viewModel: DetailViewModel(mediaId: Int(media.id), mediaType: media.type ?? .tvShow)))
         } label: {
             cardBody
         }.listRowBackground(cardBackground)
