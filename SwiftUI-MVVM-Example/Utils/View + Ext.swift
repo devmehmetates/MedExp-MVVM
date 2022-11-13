@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-    @ViewBuilder func createLoadingState() -> some View {
+    var loadingState: some View {
         VStack {
             ProgressView()
         }

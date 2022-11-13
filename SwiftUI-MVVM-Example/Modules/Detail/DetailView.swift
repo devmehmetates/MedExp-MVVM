@@ -57,7 +57,7 @@ struct DetailView<Model>: View where Model: DetailViewModelProtocol {
                     .ignoresSafeArea(edges: .top)
                     
             } else {
-                createLoadingState()
+                loadingState
                     .onAppear {
                         viewModel.handleMediaDetail()
                     }

@@ -27,7 +27,7 @@ struct HomeView<Model>: View where Model: HomeViewModelProtocol {
                         }
                     }
                 } else {
-                    createLoadingState()
+                    loadingState
                 }
             }.navigationTitle("What's Popular")
         }.tag("Home")
