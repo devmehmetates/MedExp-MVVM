@@ -41,10 +41,10 @@ extension DetailView {
                     createOverViewStack(media: media)
                 }
                 if !viewModel.mediaActors.isEmpty {
-                    createActorsStack(media: media)
+                    createActorsStack
                 }
                 if !viewModel.mediaVideos.isEmpty {
-                    createVideosStack(media: media)
+                    createVideosStack
                 }
                 if !viewModel.recommendedMedia.isEmpty {
                     youMayLikeStack
@@ -89,7 +89,7 @@ extension DetailView {
         }
     }
     
-    private func createActorsStack(media: Media) -> some View {
+    private var createActorsStack: some View {
         CustomSectionView(title: "Actors") {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
@@ -101,7 +101,7 @@ extension DetailView {
         }
     }
     
-    private func createVideosStack(media: Media) -> some View {
+    private var createVideosStack: some View {
         CustomSectionView(title: "Videos") {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
