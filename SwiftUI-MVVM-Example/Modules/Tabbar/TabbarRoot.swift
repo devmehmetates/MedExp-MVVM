@@ -17,11 +17,18 @@ struct TabbarRoot: View {
             SearchView(viewModel: SearchViewModel())
                 .tag("Search")
         }.overlay(alignment: .bottom) {
-            HStack {
-                TabbarButton(currentTab: $currentTab, title: "Home", icon: "rectangle.portrait")
-                TabbarButton(currentTab: $currentTab, title: "Search", icon: "magnifyingglass")
-            }
+            bottomTabbarStack
         }.ignoresSafeArea(.keyboard, edges: .bottom)
+    }
+}
+
+// MARK: View Component(s)
+extension TabbarRoot {
+    private var bottomTabbarStack: some View {
+        HStack {
+            TabbarButton(currentTab: $currentTab, title: "Home", icon: "rectangle.portrait")
+            TabbarButton(currentTab: $currentTab, title: "Search", icon: "magnifyingglass")
+        }
     }
 }
 
