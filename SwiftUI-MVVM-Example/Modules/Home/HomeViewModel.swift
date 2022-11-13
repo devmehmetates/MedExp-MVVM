@@ -41,7 +41,6 @@ extension HomeViewModel {
     private func createSectionEndpoint(sectionKey key: String, page: Int, pathVariables: [String]? = nil) -> URL {
         NetworkManager.shared.createRequestURL(key, pathVariables: pathVariables, headerParams: [
             "page": page,
-            "api_key": AppEnvironments.apiKey
         ])
     }
     

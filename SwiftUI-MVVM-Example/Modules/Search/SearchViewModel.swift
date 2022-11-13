@@ -45,7 +45,6 @@ class SearchViewModel: SearchViewModelProtocol {
         let url = NetworkManager.shared.createRequestURL(ApiEndpoints.search.rawValue, headerParams: [
             "page": page,
             "query": searchKey,
-            "api_key": AppEnvironments.apiKey
         ])
         handleMediaListApiRequests(endPoint: url) { [weak self] mediaList in
             DispatchQueue.main.async {

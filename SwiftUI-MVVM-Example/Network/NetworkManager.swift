@@ -77,10 +77,9 @@ extension NetworkManager {
 extension NetworkManager {
     func createRequestURL(_ endpoint: String, pathVariables: [String]? = nil, headerParams: [String: Any]? = nil) -> URL {
         var requestParams: String = ""
+        requestParams += ("?api_key=\(AppEnvironments.apiKey)")
         for (key, value) in (headerParams ?? [:]) {
-            if key == headerParams?.keys.first ?? "" {
-                requestParams += ("?\(key)=\(value)")
-            } else if key == "query" {
+            if key == "query" {
                 requestParams += ("&\(key)=\(safeQuery(query: value as? String ?? ""))")
             } else {
                 requestParams += ("&\(key)=\(value)")

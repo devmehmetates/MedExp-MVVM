@@ -35,9 +35,7 @@ class DetailViewModel: DetailViewModelProtocol {
     func handleMediaDetail() {
         let endpoint: String = mediaType == .tvShow ? ApiEndpoints.tvShowDetail.rawValue : ApiEndpoints.movieShowDetail.rawValue
         
-        let url = NetworkManager.shared.createRequestURL(endpoint, pathVariables: [String(mediaId)], headerParams: [
-            "api_key": AppEnvironments.apiKey
-        ])
+        let url = NetworkManager.shared.createRequestURL(endpoint, pathVariables: [String(mediaId)])
         
         NetworkManager.shared.apiRequest(endpoint: url) { response in
             switch response {
@@ -54,8 +52,6 @@ class DetailViewModel: DetailViewModelProtocol {
         let actorsUrl = NetworkManager.shared.createRequestURL(endpoint, pathVariables: [
             String(mediaId),
             mediaType == .tvShow ? "aggregate_credits" : "credits"
-        ], headerParams: [
-            "api_key": AppEnvironments.apiKey
         ])
         
         NetworkManager.shared.apiRequest(endpoint: actorsUrl) { response in
@@ -73,8 +69,6 @@ class DetailViewModel: DetailViewModelProtocol {
         let videosUrl = NetworkManager.shared.createRequestURL(endpoint, pathVariables: [
             String(mediaId),
             "videos"
-        ], headerParams: [
-            "api_key": AppEnvironments.apiKey
         ])
         
         NetworkManager.shared.apiRequest(endpoint: videosUrl) { response in
@@ -92,8 +86,6 @@ class DetailViewModel: DetailViewModelProtocol {
         let recommendedURL = NetworkManager.shared.createRequestURL(endpoint, pathVariables: [
             String(mediaId),
             "recommendations"
-        ], headerParams: [
-            "api_key": AppEnvironments.apiKey
         ])
         
         NetworkManager.shared.apiRequest(endpoint: recommendedURL) { response in
