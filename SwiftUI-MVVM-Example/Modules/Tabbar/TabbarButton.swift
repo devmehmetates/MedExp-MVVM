@@ -9,21 +9,30 @@ import SwiftUI
 
 struct TabbarButton: View {
     @Binding var currentTab: String
+    private var isSelected: Bool { currentTab == title }
     let title: String
     let icon: String
-    private var isSelected: Bool { currentTab == title }
     
     var body: some View {
-        Button {
-            withAnimation {
-                currentTab = title
-            }
-        } label: {
-            VStack {
-                Image(systemName: icon)
-                Text(title)
-            }.frame(maxWidth: .infinity)
-                .foregroundColor(isSelected ? .accentColor : .secondary)
+        Button(action: buttonAction) {
+            buttonLabel
+        }
+    }
+}
+
+// MARK: - View Component(s)
+extension TabbarButton {
+    private var buttonLabel: some View {
+        VStack {
+            Image(systemName: icon)
+            Text(title)
+        }.frame(maxWidth: .infinity)
+            .foregroundColor(isSelected ? .accentColor : .secondary)
+    }
+    
+    private func buttonAction() {
+        withAnimation {
+            currentTab = title
         }
     }
 }
