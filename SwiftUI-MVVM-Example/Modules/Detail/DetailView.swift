@@ -14,12 +14,10 @@ struct DetailView<Model>: View where Model: DetailViewModelProtocol {
     @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
-        Group {
-            if let media = viewModel.mediaDetail {
-                createLoadedState(media: media)
-            } else {
-                createLoadedState(media: Media()).redacted(reason: .placeholder)
-            }
+        if viewModel.isPageLoaded {
+            createLoadedState(mediaValues: viewModel.mediaDetailValue)
+        } else {
+            createLoadedState(mediaValues: DetailViewModelValues()).redacted(reason: .placeholder)
         }
     }
 }
@@ -32,21 +30,21 @@ struct DetailView_Previews: PreviewProvider {
 
 // MARK: - View Components
 extension DetailView {
-    private func createLoadedState(media: Media) -> some View {
+    private func createLoadedState(mediaValues: DetailViewModelValues) -> some View {
         ScrollView {
-            StickyAsyncImageSwiftUI(url: URL(string: media.originalBackdropImage), size: 50.0.responsizeW, coordinateSpace: "sticky", isGradientOn: true, linearGradient: overlayLinearGradient)
-            createImageHeaderInformationStack(media: media)
+            StickyAsyncImageSwiftUI(url: URL(string: mediaValues.mediaDetail.originalBackdropImage), size: 50.0.responsizeW, coordinateSpace: "sticky", isGradientOn: true, linearGradient: overlayLinearGradient)
+            createImageHeaderInformationStack(media: mediaValues.mediaDetail)
             LazyVStack(spacing: 3.0.responsizeW) {
-                if !media.overview.isEmpty {
-                    createOverViewStack(media: media)
+                if !mediaValues.mediaDetail.overview.isEmpty {
+                    createOverViewStack(media: mediaValues.mediaDetail)
                 }
-                if !viewModel.mediaActors.isEmpty {
+                if !mediaValues.mediaActors.isEmpty {
                     createActorsStack
                 }
-                if !viewModel.mediaVideos.isEmpty {
+                if !mediaValues.mediaVideos.isEmpty {
                     createVideosStack
                 }
-                if !viewModel.recommendedMedia.isEmpty {
+                if !mediaValues.recommendedMedia.isEmpty {
                     youMayLikeStack
                 }
             }
@@ -93,7 +91,7 @@ extension DetailView {
         CustomSectionView(title: "Actors") {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
-                    ForEach(viewModel.mediaActors) { mediaActor in
+                    ForEach(viewModel.mediaDetailValue.mediaActors) { mediaActor in
                         ActorCardView(actor: mediaActor)
                     }
                 }.padding([.horizontal, .bottom])
@@ -105,7 +103,7 @@ extension DetailView {
         CustomSectionView(title: "Videos") {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
-                    ForEach(viewModel.mediaVideos) { mediaVideo in
+                    ForEach(viewModel.mediaDetailValue.mediaVideos) { mediaVideo in
                         YoutubeVideoView(mediaVideo.videoLink)
                     }
                 }.padding([.horizontal, .bottom])
@@ -114,7 +112,7 @@ extension DetailView {
     }
     
     private var youMayLikeStack: some View {
-        MediaListSection(mediaList: viewModel.recommendedMedia, sectionTitle: "You May Like", titleFont: .title, mediaType: viewModel.mediaType)
+        MediaListSection(mediaList: viewModel.mediaDetailValue.recommendedMedia, sectionTitle: "You May Like", titleFont: .title, mediaType: viewModel.mediaDetailValue.mediaType)
     }
 }
 
