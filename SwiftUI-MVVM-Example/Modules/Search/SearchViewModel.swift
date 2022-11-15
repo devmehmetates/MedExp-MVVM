@@ -25,13 +25,19 @@ class SearchViewModel: SearchViewModelProtocol {
             searchKeyDidSet()
         }
     }
-    
+}
+
+// MARK: - Interface Setup
+extension SearchViewModel {
     func setPage(_ index: Int) {
         if index == searchList.count - 3 {
             page < 10 ? page += 1 : nil
         }
     }
-    
+}
+
+// MARK: - Logic(s)
+extension SearchViewModel {
     private func searchKeyDidSet() {
         searchList.removeAll()
         if searchKey.isEmpty {
@@ -39,8 +45,10 @@ class SearchViewModel: SearchViewModelProtocol {
         }
         handleSearchMedia()
     }
-    
-    // MARK: - Api process
+}
+
+// MARK: - Api process
+extension SearchViewModel {
     private func handleSearchMedia() {
         let url = NetworkManager.shared.createRequestURL(ApiEndpoints.search.rawValue, headerParams: [
             "page": page,
