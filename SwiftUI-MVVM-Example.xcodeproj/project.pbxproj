@@ -30,6 +30,7 @@
 		C03B6C8F2917C816008E5018 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03B6C8E2917C816008E5018 /* HomeViewModel.swift */; };
 		C044397E291E4DF600EE354E /* ActorCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C044397D291E4DF600EE354E /* ActorCardView.swift */; };
 		C0443980291E4E1800EE354E /* CardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C044397F291E4E1800EE354E /* CardProtocol.swift */; };
+		C04DF5472928D0C4006622A9 /* MedExp_HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DF5462928D0C4006622A9 /* MedExp_HomeViewModelTests.swift */; };
 		C0892213291E79CB00524D9A /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0892212291E79CB00524D9A /* Actor.swift */; };
 		C0892215291E79FA00524D9A /* ActorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0892214291E79FA00524D9A /* ActorList.swift */; };
 		C0892217291E7A2F00524D9A /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0892216291E7A2F00524D9A /* Role.swift */; };
@@ -48,6 +49,16 @@
 		C0FC605C2918F48A00643C93 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FC605B2918F48A00643C93 /* SearchViewModel.swift */; };
 		C0FC605E2918F52100643C93 /* RequestAbleMovieListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FC605D2918F52100643C93 /* RequestAbleMovieListProtocol.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C07CFAAB2927EEA000DAD151 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C010A561291178CE00C971FB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C010A568291178CE00C971FB;
+			remoteInfo = "SwiftUI-MVVM-Example";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		C0085F472913EB98001C174A /* AnimatedAsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedAsyncImageView.swift; sourceTree = "<group>"; };
@@ -73,6 +84,8 @@
 		C03B6C8E2917C816008E5018 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C044397D291E4DF600EE354E /* ActorCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorCardView.swift; sourceTree = "<group>"; };
 		C044397F291E4E1800EE354E /* CardProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProtocol.swift; sourceTree = "<group>"; };
+		C04DF5462928D0C4006622A9 /* MedExp_HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedExp_HomeViewModelTests.swift; sourceTree = "<group>"; };
+		C07CFAA72927EEA000DAD151 /* SwiftUI-MVVM-ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftUI-MVVM-ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0892212291E79CB00524D9A /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		C0892214291E79FA00524D9A /* ActorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorList.swift; sourceTree = "<group>"; };
 		C0892216291E7A2F00524D9A /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
@@ -101,6 +114,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C07CFAA42927EEA000DAD151 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -122,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				C010A56B291178CE00C971FB /* SwiftUI-MVVM-Example */,
+				C07CFAA82927EEA000DAD151 /* SwiftUI-MVVM-ExampleTests */,
 				C010A56A291178CE00C971FB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				C010A569291178CE00C971FB /* SwiftUI-MVVM-Example.app */,
+				C07CFAA72927EEA000DAD151 /* SwiftUI-MVVM-ExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,6 +242,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		C07CFAA82927EEA000DAD151 /* SwiftUI-MVVM-ExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				C04DF5462928D0C4006622A9 /* MedExp_HomeViewModelTests.swift */,
+			);
+			path = "SwiftUI-MVVM-ExampleTests";
+			sourceTree = "<group>";
+		};
 		C094A954291509E600D2BB39 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +307,24 @@
 			productReference = C010A569291178CE00C971FB /* SwiftUI-MVVM-Example.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C07CFAA62927EEA000DAD151 /* SwiftUI-MVVM-ExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C07CFAAF2927EEA000DAD151 /* Build configuration list for PBXNativeTarget "SwiftUI-MVVM-ExampleTests" */;
+			buildPhases = (
+				C07CFAA32927EEA000DAD151 /* Sources */,
+				C07CFAA42927EEA000DAD151 /* Frameworks */,
+				C07CFAA52927EEA000DAD151 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C07CFAAC2927EEA000DAD151 /* PBXTargetDependency */,
+			);
+			name = "SwiftUI-MVVM-ExampleTests";
+			productName = "SwiftUI-MVVM-ExampleTests";
+			productReference = C07CFAA72927EEA000DAD151 /* SwiftUI-MVVM-ExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -284,11 +332,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					C010A568291178CE00C971FB = {
 						CreatedOnToolsVersion = 14.0.1;
+					};
+					C07CFAA62927EEA000DAD151 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = C010A568291178CE00C971FB;
 					};
 				};
 			};
@@ -310,6 +362,7 @@
 			projectRoot = "";
 			targets = (
 				C010A568291178CE00C971FB /* SwiftUI-MVVM-Example */,
+				C07CFAA62927EEA000DAD151 /* SwiftUI-MVVM-ExampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -321,6 +374,13 @@
 			files = (
 				C010A574291178CF00C971FB /* Preview Assets.xcassets in Resources */,
 				C010A571291178CF00C971FB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C07CFAA52927EEA000DAD151 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +430,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C07CFAA32927EEA000DAD151 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C04DF5472928D0C4006622A9 /* MedExp_HomeViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C07CFAAC2927EEA000DAD151 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C010A568291178CE00C971FB /* SwiftUI-MVVM-Example */;
+			targetProxy = C07CFAAB2927EEA000DAD151 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C010A575291178CF00C971FB /* Debug */ = {
@@ -557,6 +633,50 @@
 			};
 			name = Release;
 		};
+		C07CFAAD2927EEA000DAD151 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6PALB6K8YY;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.devmehmetates.SwiftUI-MVVM-ExampleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUI-MVVM-Example.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwiftUI-MVVM-Example";
+			};
+			name = Debug;
+		};
+		C07CFAAE2927EEA000DAD151 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6PALB6K8YY;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.devmehmetates.SwiftUI-MVVM-ExampleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUI-MVVM-Example.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwiftUI-MVVM-Example";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -574,6 +694,15 @@
 			buildConfigurations = (
 				C010A578291178CF00C971FB /* Debug */,
 				C010A579291178CF00C971FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C07CFAAF2927EEA000DAD151 /* Build configuration list for PBXNativeTarget "SwiftUI-MVVM-ExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C07CFAAD2927EEA000DAD151 /* Debug */,
+				C07CFAAE2927EEA000DAD151 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

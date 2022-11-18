@@ -28,6 +28,17 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C07CFAA62927EEA000DAD151"
+               BuildableName = "SwiftUI-MVVM-ExampleTests.xctest"
+               BlueprintName = "SwiftUI-MVVM-ExampleTests"
+               ReferencedContainer = "container:SwiftUI-MVVM-Example.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
