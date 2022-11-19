@@ -7,7 +7,17 @@
 
 import Foundation
 
-struct NetworkManager {
+protocol NetworkManagerProtocol {
+    static var shared: NetworkManager { get }
+    func apiRequest(endpoint: URL, param: Data?, completion: @escaping (Result<Data, RequestErrors>) -> Void)
+    func createPosterimageUrl(withPath path: String?) -> String
+    func createBackdropimageUrl(withPath path: String?) -> String
+    func createOriginalImageUrl(withPath path: String?) -> String
+    func createLogoimageUrl(withPath path: String?) -> String
+    func createRequestURL(_ endpoint: String, pathVariables: [String]?, headerParams: [String: Any]?) -> URL
+}
+
+struct NetworkManager: NetworkManagerProtocol {
     static let shared: NetworkManager = NetworkManager()
     
     func apiRequest(endpoint: URL, param: Data? = nil, completion: @escaping (Result<Data, RequestErrors>) -> Void) {
@@ -23,35 +33,6 @@ struct NetworkManager {
             return completion(.success(data))
         }.resume()
     }
-}
-
-// MARK: - Endpoint(s)
-enum ApiEndpoints: String {
-    // Discover Tab
-    case popularOnTV = "/tv/popular"
-    case popularMovies = "/movie/popular"
-    case topRatedTV = "/tv/top_rated"
-    case topRatedMovies = "/movie/top_rated"
-    // Trending Tab
-    case trendingMovie = "/trending/movie/week"
-    case trendingTv = "/trending/tv/week"
-    // Search Tab
-    case search = "/search/multi"
-    // DetailPage
-    case tvShowDetail = "/tv"
-    case movieShowDetail = "/movie"
-}
-
-// MARK: - Error(s)
-enum RequestErrors: Error {
-    case wrongUrl
-    case emptyData
-}
-
-// MARK: - HttpMethod(s)
-enum HttpMethods: String {
-    case get = "GET"
-    case post = "POST"
 }
 
 // MARK: - Image function(s)
@@ -98,4 +79,33 @@ extension NetworkManager {
     private func safeQuery(query: String) -> String {
         query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
     }
+}
+
+// MARK: - Endpoint(s)
+enum ApiEndpoints: String {
+    // Discover Tab
+    case popularOnTV = "/tv/popular"
+    case popularMovies = "/movie/popular"
+    case topRatedTV = "/tv/top_rated"
+    case topRatedMovies = "/movie/top_rated"
+    // Trending Tab
+    case trendingMovie = "/trending/movie/week"
+    case trendingTv = "/trending/tv/week"
+    // Search Tab
+    case search = "/search/multi"
+    // DetailPage
+    case tvShowDetail = "/tv"
+    case movieShowDetail = "/movie"
+}
+
+// MARK: - Error(s)
+enum RequestErrors: Error {
+    case wrongUrl
+    case emptyData
+}
+
+// MARK: - HttpMethod(s)
+enum HttpMethods: String {
+    case get = "GET"
+    case post = "POST"
 }
