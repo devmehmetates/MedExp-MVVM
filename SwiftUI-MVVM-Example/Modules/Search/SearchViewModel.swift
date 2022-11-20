@@ -39,6 +39,12 @@ extension SearchViewModel {
         if index == searchList.count - 3 {
             page < 10 ? page += 1 : nil
         }
+        
+        #if DEBUG
+        if index == -1 {
+            page += 1
+        }
+        #endif
     }
 }
 
@@ -56,7 +62,7 @@ extension SearchViewModel {
 // MARK: - Api process
 extension SearchViewModel {
     private func handleSearchMedia() {
-        let url = NetworkManager.shared.createRequestURL(ApiEndpoints.search.rawValue, headerParams: [
+        let url = manager.createRequestURL(ApiEndpoints.search.rawValue, pathVariables: nil, headerParams: [
             "page": page,
             "query": searchKey,
         ])
