@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C00232D0292A2B4C00FC82C2 /* Med_Exp_SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00232CF292A2B4C00FC82C2 /* Med_Exp_SearchViewModelTests.swift */; };
+		C00232D2292A343800FC82C2 /* MedExp_DetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00232D1292A343800FC82C2 /* MedExp_DetailViewModelTests.swift */; };
 		C0085F482913EB98001C174A /* AnimatedAsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0085F472913EB98001C174A /* AnimatedAsyncImageView.swift */; };
 		C0085F4C2913EE49001C174A /* Double + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0085F4B2913EE49001C174A /* Double + Ext.swift */; };
 		C0085F4E2913EE72001C174A /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0085F4D2913EE72001C174A /* AppConstants.swift */; };
@@ -64,6 +65,7 @@
 
 /* Begin PBXFileReference section */
 		C00232CF292A2B4C00FC82C2 /* Med_Exp_SearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Med_Exp_SearchViewModelTests.swift; sourceTree = "<group>"; };
+		C00232D1292A343800FC82C2 /* MedExp_DetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedExp_DetailViewModelTests.swift; sourceTree = "<group>"; };
 		C0085F472913EB98001C174A /* AnimatedAsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedAsyncImageView.swift; sourceTree = "<group>"; };
 		C0085F4B2913EE49001C174A /* Double + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + Ext.swift"; sourceTree = "<group>"; };
 		C0085F4D2913EE72001C174A /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 		C07CFAA82927EEA000DAD151 /* SwiftUI-MVVM-ExampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				C00232D1292A343800FC82C2 /* MedExp_DetailViewModelTests.swift */,
 				C00232CF292A2B4C00FC82C2 /* Med_Exp_SearchViewModelTests.swift */,
 				C04DF5462928D0C4006622A9 /* MedExp_HomeViewModelTests.swift */,
 			);
@@ -449,6 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C00232D2292A343800FC82C2 /* MedExp_DetailViewModelTests.swift in Sources */,
 				C04DF5472928D0C4006622A9 /* MedExp_HomeViewModelTests.swift in Sources */,
 				C00232D0292A2B4C00FC82C2 /* Med_Exp_SearchViewModelTests.swift in Sources */,
 			);

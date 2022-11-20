@@ -18,14 +18,16 @@ class DetailViewModel: DetailViewModelProtocol {
     
     var mediaId: Int
     var mediaType: MediaTypes
+    private var manager: NetworkManagerProtocol!
     
-    init(mediaId: Int, mediaType: MediaTypes) {
+    init(mediaId: Int, mediaType: MediaTypes, manager: NetworkManagerProtocol? = nil) {
+        self.manager = manager ?? NetworkManager()
         self.mediaId = mediaId
         self.mediaType = mediaType
         handleMedia()
     }
     
-    func handleMedia() {
+    private func handleMedia() {
         let endpoint: String = mediaType == .tvShow ? ApiEndpoints.tvShowDetail.rawValue : ApiEndpoints.movieShowDetail.rawValue
         handleMediaDetail(endpoint)
         handleMediaActors(endpoint)
@@ -33,10 +35,10 @@ class DetailViewModel: DetailViewModelProtocol {
         handleRecommendedMedia(endpoint)
     }
     
-    func handleMediaDetail(_ endpoint: String) {
-        let url = NetworkManager.shared.createRequestURL(endpoint, pathVariables: [String(mediaId)])
+    private func handleMediaDetail(_ endpoint: String) {
+        let url = manager.createRequestURL(endpoint, pathVariables: [String(mediaId)], headerParams: nil)
         
-        NetworkManager.shared.apiRequest(endpoint: url) { response in
+        manager.apiRequest(endpoint: url, param: nil) { response in
             switch response {
             case .success(let data):
                 guard let decodedData: Media = data.decodedModel() else { return }
@@ -50,13 +52,13 @@ class DetailViewModel: DetailViewModelProtocol {
         }
     }
     
-    func handleMediaActors(_ endpoint: String) {
-        let actorsUrl = NetworkManager.shared.createRequestURL(endpoint, pathVariables: [
+    private func handleMediaActors(_ endpoint: String) {
+        let actorsUrl = manager.createRequestURL(endpoint, pathVariables: [
             String(mediaId),
             mediaType == .tvShow ? "aggregate_credits" : "credits"
-        ])
+        ], headerParams: nil)
         
-        NetworkManager.shared.apiRequest(endpoint: actorsUrl) { response in
+        manager.apiRequest(endpoint: actorsUrl, param: nil) { response in
             switch response {
             case .success(let data):
                 guard let decodedData: ActorList = data.decodedModel() else { return }
@@ -69,13 +71,13 @@ class DetailViewModel: DetailViewModelProtocol {
         }
     }
     
-    func handleMediaVideos(_ endpoint: String) {
-        let videosUrl = NetworkManager.shared.createRequestURL(endpoint, pathVariables: [
+    private func handleMediaVideos(_ endpoint: String) {
+        let videosUrl = manager.createRequestURL(endpoint, pathVariables: [
             String(mediaId),
             "videos"
-        ])
+        ], headerParams: nil)
         
-        NetworkManager.shared.apiRequest(endpoint: videosUrl) { response in
+        manager.apiRequest(endpoint: videosUrl, param: nil) { response in
             switch response {
             case .success(let data):
                 guard let decodedData: MediaVideoList = data.decodedModel() else { return }
@@ -88,13 +90,13 @@ class DetailViewModel: DetailViewModelProtocol {
         }
     }
     
-    func handleRecommendedMedia(_ endpoint: String) {
-        let recommendedURL = NetworkManager.shared.createRequestURL(endpoint, pathVariables: [
+    private func handleRecommendedMedia(_ endpoint: String) {
+        let recommendedURL = manager.createRequestURL(endpoint, pathVariables: [
             String(mediaId),
             "recommendations"
-        ])
+        ], headerParams: nil)
         
-        NetworkManager.shared.apiRequest(endpoint: recommendedURL) { response in
+        manager.apiRequest(endpoint: recommendedURL, param: nil) { response in
             switch response {
             case .success(let data):
                 guard let decodedData: MediaList = data.decodedModel() else { return }
