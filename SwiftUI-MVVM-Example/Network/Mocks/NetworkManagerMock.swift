@@ -86,7 +86,7 @@ class NetworkManagerMock: NetworkManagerProtocol {
     var invokedCreateRequestURLCount = 0
     var invokedCreateRequestURLParameters: (endpoint: String, pathVariables: [String]?, headerParams: [String: Any]?)?
     var invokedCreateRequestURLParametersList = [(endpoint: String, pathVariables: [String]?, headerParams: [String: Any]?)]()
-    var stubbedCreateRequestURLResult: URL!
+    var stubbedCreateRequestURLResult: URL! = URL(string: AppConstants.shared.exampleImagePath)!
 
     func createRequestURL(_ endpoint: String, pathVariables: [String]?, headerParams: [String: Any]?) -> URL {
         invokedCreateRequestURL = true

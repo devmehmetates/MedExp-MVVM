@@ -17,8 +17,10 @@ protocol HomeViewModelProtocol: RequestableMediaListProtocol {
 class HomeViewModel: HomeViewModelProtocol {
     @Published var mediaSections: [String: MediaSectionValue] = [:]
     @Published var isPageLoaded: Bool = false
+    private var manager: NetworkManagerProtocol!
     
-    init() {
+    init(manager: NetworkManagerProtocol? = nil) {
+        self.manager = manager ?? NetworkManager()
         sectionInit()
     }
 }
@@ -28,7 +30,7 @@ extension HomeViewModel {
     private func sectionInit() {
         for (mediaSectionKey, mediaSectionValues) in mediaSectionInitilizer {
             let endpoint: URL = createSectionEndpoint(sectionKey: mediaSectionValues.endpoint, page: 1)
-            handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
+            handleMediaListApiRequests(endPoint: endpoint, manager: manager) { [weak self] mediaList in
                 DispatchQueue.main.async {
                     self?.mediaSections[mediaSectionKey] = MediaSectionValue(mediaList: mediaList, page: 1, type: mediaSectionValues.type)
                     self?.filtMediaListQuality(mediaSectionKey)
@@ -39,14 +41,14 @@ extension HomeViewModel {
     }
     
     private func createSectionEndpoint(sectionKey key: String, page: Int, pathVariables: [String]? = nil) -> URL {
-        NetworkManager.shared.createRequestURL(key, pathVariables: pathVariables, headerParams: [
+        manager.createRequestURL(key, pathVariables: pathVariables, headerParams: [
             "page": page,
         ])
     }
     
     private func updateSection(_ key: String, endpointRawValue: String, page: Int) {
         let endpoint: URL = createSectionEndpoint(sectionKey: endpointRawValue, page: page)
-        handleMediaListApiRequests(endPoint: endpoint) { [weak self] mediaList in
+        handleMediaListApiRequests(endPoint: endpoint, manager: manager) { [weak self] mediaList in
             DispatchQueue.main.async {
                 self?.mediaSections[key]?.mediaList += mediaList
                 self?.filtMediaListQuality(key)

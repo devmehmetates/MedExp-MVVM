@@ -10,8 +10,8 @@ import Foundation
 protocol RequestableMediaListProtocol: ObservableObject { }
 
 extension RequestableMediaListProtocol {
-    func handleMediaListApiRequests(endPoint: URL, completion: ((_ mediaList: [Media]) -> Void)? = nil) {
-        NetworkManager.shared.apiRequest(endpoint: endPoint) { response in
+    func handleMediaListApiRequests(endPoint: URL, manager: NetworkManagerProtocol, completion: ((_ mediaList: [Media]) -> Void)? = nil) {
+        manager.apiRequest(endpoint: endPoint, param: nil) { response in
             switch response {
             case .success(let data):
                 guard let decodedData: MediaList = data.decodedModel() else { return }

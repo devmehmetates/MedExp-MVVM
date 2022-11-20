@@ -25,6 +25,12 @@ class SearchViewModel: SearchViewModelProtocol {
             searchKeyDidSet()
         }
     }
+    
+    private var manager: NetworkManagerProtocol!
+    
+    init(manager: NetworkManagerProtocol? = nil) {
+        self.manager = manager ?? NetworkManager()
+    }
 }
 
 // MARK: - Interface Setup
@@ -54,7 +60,7 @@ extension SearchViewModel {
             "page": page,
             "query": searchKey,
         ])
-        handleMediaListApiRequests(endPoint: url) { [weak self] mediaList in
+        handleMediaListApiRequests(endPoint: url, manager: manager) { [weak self] mediaList in
             DispatchQueue.main.async {
                 self?.searchList += mediaList.filter { $0.title != "Unknowed" }
             }
