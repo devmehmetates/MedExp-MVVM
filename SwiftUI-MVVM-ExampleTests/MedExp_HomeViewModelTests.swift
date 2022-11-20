@@ -10,14 +10,33 @@ import XCTest
 
 final class MedExp_HomeViewModelTests: XCTestCase {
     private var homeViewModel: HomeViewModel!
+    private var networkManager: NetworkManagerMock!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        homeViewModel = HomeViewModel()
+        networkManager = NetworkManagerMock()
+        homeViewModel = HomeViewModel(manager: networkManager)
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         homeViewModel = nil
+        networkManager = nil
+    }
+    
+    func testSectionInit() {
+        XCTAssertTrue(networkManager.invokedApiRequest)
+        XCTAssertEqual(networkManager.invokedApiRequestCount, 6)
+    }
+    
+    func testCreateSectionEndpoint() {
+        XCTAssertTrue(networkManager.invokedCreateRequestURL)
+        XCTAssertEqual(networkManager.invokedCreateRequestURLCount, 6)
+    }
+    
+    func testIncreasePage() {
+        homeViewModel.increasePage(withSectionKey: "Popular on TV")
+        XCTAssertEqual(networkManager.invokedApiRequestCount, 7)
+        XCTAssertEqual(networkManager.invokedCreateRequestURLCount, 7)
     }
 }
