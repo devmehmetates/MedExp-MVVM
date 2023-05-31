@@ -89,3 +89,4 @@ fastlane/test_output
 
 iOSInjectionProject/
 SwiftUI-MVVM-Example/Core/AppEnvironments.swift
+.DS_Store
