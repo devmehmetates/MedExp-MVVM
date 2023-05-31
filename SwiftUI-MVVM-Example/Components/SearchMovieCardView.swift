@@ -10,13 +10,29 @@ import SwiftUI
 struct SearchMediaCardView: View {
     @Environment(\.colorScheme) var colorScheme
     let media: Media
+    @State private var isInformationOn: Bool = false
+    @State private var isActive = false
     
     var body: some View {
-        NavigationLink {
-            LazyNavigate(DetailView(viewModel: DetailViewModel(mediaId: Int(media.id), mediaType: media.type ?? .tvShow)))
-        } label: {
+        ZStack(alignment: .bottom) {
             cardBody
-        }.listRowBackground(cardBackground)
+                .offset(y: isInformationOn ? -55.0.responsizeW : 0)
+            cardInformation
+                .offset(y: isInformationOn ? 0 : 50.0.responsizeW)
+                .opacity(isInformationOn ? 1 : 0)
+        }.onTapGesture {
+            isActive.toggle()
+        }.onLongPressGesture {
+            withAnimation(.spring()) {
+                isInformationOn.toggle()
+            }
+        }.onDisappear{
+            isInformationOn = false
+        }.clipped()
+            .background(
+                NavigationLink(destination: LazyNavigate(DetailView(viewModel: DetailViewModel(mediaId: Int(media.id), mediaType: media.type ?? .tvShow))),isActive: $isActive) {
+                            EmptyView()
+                        })
     }
 }
 
@@ -26,6 +42,7 @@ extension SearchMediaCardView {
         VStack(alignment: .leading) {
             Text(media.title)
                 .font(.title3)
+                .fontWeight(.bold)
                 .lineLimit(2)
             Text("(\(media.releaseYear))")
                 Spacer()
@@ -33,24 +50,28 @@ extension SearchMediaCardView {
                 .font(.caption)
                 .lineLimit(6)
             Spacer()
-        }
+        }.padding()
+            .frame(width: 45.0.responsizeW, height: 50.0.responsizeW)
+            .background(.quaternary)
     }
     
     private var cardBody: some View {
-        HStack {
+        ZStack(alignment: .bottomTrailing) {
             AnimatedAsyncImageView(path: media.posterImage)
-                .frame(width: 30.0.responsizeW)
-                .padding(.trailing, 1.0.responsizeW)
-            mediaInformationStack
-        }.frame(height: 45.0.responsizeW)
+                .aspectRatio(0.65, contentMode: .fill)
+            LinearGradient(colors: [.clear, .clear, .black.opacity(0.8)], startPoint: .top, endPoint: .bottom)
+            HStack(spacing: 5) {
+                Text("Press Long")
+                Image(systemName: "hand.tap.fill")
+            }.font(.caption2)
+                .padding()
+                .foregroundColor(.white)
+        }.cornerRadius(10)
     }
     
-    private var cardBackground: some View {
-        AnimatedAsyncImageView(path: media.backdropImage, cornerRadius: 0).overlay {
-            Rectangle()
-                .foregroundColor(backgroundColor)
-                .opacity(0.8)
-        }
+    private var cardInformation: some View {
+        mediaInformationStack
+            .cornerRadius(10)
     }
 }
 
@@ -59,4 +80,12 @@ extension SearchMediaCardView {
     private var backgroundColor: Color { colorScheme == .dark ? .black : .white }
 }
 
-
+struct SearchMediaCard_Previews: PreviewProvider {
+    static var previews: some View {
+        let viewModel = SearchViewModel()
+        SearchView(viewModel: viewModel)
+            .onAppear {
+                viewModel.searchKey = "Titanic"
+            }
+    }
+}
